@@ -17,7 +17,8 @@
     "@mui/icons-material": "^5.2.5",
     "@mui/styles": "^5.2.3",
     "@emotion/react": "^11.7.1",
-    "@emotion/styled": "^11.6.0"
+    "@emotion/styled": "^11.6.0",
+    "react-router-dom": "5.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

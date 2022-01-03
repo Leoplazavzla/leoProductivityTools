@@ -4,6 +4,8 @@ import {Menu as MenuIcon} from "@material-ui/icons"
 import {AppBar, Button, IconButton, Toolbar, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles"
 import Strings from "../../resources/Strings"
+import {Link} from "react-router-dom";
+import {paths} from "../../resources/paths"
 
 const useStyles = makeStyles(theme => ({
         menuButton: {
@@ -40,9 +42,11 @@ const NavBar = (props) => {
                     variant={"h6"}
                     className={classes.title}
                 >
-                    {Strings.app.name}
+                    <Link style={{color: 'white', textDecoration: 'none'}} to={paths.home}>
+                        {Strings.app.name}
+                    </Link>
                 </Typography>
-                <Button variant={"text"} color={"inherit"}>{Strings.navBar.login}</Button>
+                <Link variant={"text"} color={"inherit"}>{Strings.navBar.login}</Link>
                 <Button variant={"text"} color={"inherit"}>{Strings.navBar.register}</Button>
             </Toolbar>
         </AppBar>

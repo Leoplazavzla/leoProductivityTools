@@ -11,6 +11,7 @@ import ListItemButton from '@material-ui/core/ListItem';
 import {Dashboard as DashboardIcon} from "@material-ui/icons"
 import DraftsIcon from '@material-ui/icons/Drafts';
 import Strings from "../../resources/Strings";
+import {paths} from "../../resources/paths"
 
 export default function NavBarList() {
     return (
@@ -19,7 +20,7 @@ export default function NavBarList() {
                 <nav aria-label="main mailbox folders">
                     <List>
                         <ListItem disablepadding={"false"} button>
-                            <ListItemButton component="a" href="#">
+                            <ListItemButton component="a" href={paths.dashboard}>
                                 <ListItemIcon>
                                     <DashboardIcon/>
                                 </ListItemIcon>
@@ -27,7 +28,7 @@ export default function NavBarList() {
                             </ListItemButton>
                         </ListItem>
                         <ListItem disablepadding={"false"} button>
-                            <ListItemButton component="a" href="#">
+                            <ListItemButton component="a" href={paths.messages}>
                                 <ListItemIcon>
                                     <DraftsIcon/>
                                 </ListItemIcon>
@@ -40,12 +41,12 @@ export default function NavBarList() {
                 <nav aria-label="secondary mailbox folders">
                     <List>
                         <ListItem disablepadding={"false"} color={"primary"} button>
-                            <ListItemButton component="a" href="#">
+                            <ListItemButton component="a" href={paths.posts.new}>
                                 <ListItemText primary={Strings.navBar.new}/>
                             </ListItemButton>
                         </ListItem>
                         <ListItem disablepadding={"false"} button>
-                            <ListItemButton component="a" href="#">
+                            <ListItemButton component="a" href={paths.logout}>
                                 <ListItemText primary={Strings.navBar.logout}/>
                             </ListItemButton>
                         </ListItem>
