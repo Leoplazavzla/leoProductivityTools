@@ -4,6 +4,9 @@ import {makeStyles} from "@material-ui/core/styles";
 import {Hidden} from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/core"
 import NavigationDrawer from "./NavigationDrawer";
+import Routes from "../Routes";
+import {BrowserRouter} from "react-router-dom";
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -51,9 +54,11 @@ const Navigation = () => {
             </Hidden>
 
             <div className={classes.appBar}>
+                <BrowserRouter>
                 <main className={classes.content}>
-                    <button >Contenido2</button>
+                    <Routes/>
                 </main>
+                </BrowserRouter>
 
             </div>
 

@@ -42,11 +42,11 @@ const NavBar = (props) => {
                     variant={"h6"}
                     className={classes.title}
                 >
-                    <Link style={{color: 'white', textDecoration: 'none'}} to={paths.home}>
+                    <Button style={{color: 'white', textDecoration: 'none'}} href={paths.home}>
                         {Strings.app.name}
-                    </Link>
+                    </Button>
                 </Typography>
-                <Link variant={"text"} color={"inherit"}>{Strings.navBar.login}</Link>
+                <Button variant={"text"} color={"inherit"}>{Strings.navBar.login}</Button>
                 <Button variant={"text"} color={"inherit"}>{Strings.navBar.register}</Button>
             </Toolbar>
         </AppBar>
