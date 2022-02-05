@@ -9,7 +9,8 @@ const Strings = () => {
                 new: "New Post",
                 login: "Login",
                 logout: "Logout",
-                register: "Register"
+                register: "Register",
+                motorcycles: "Motorcycles"
             },
         }
     )

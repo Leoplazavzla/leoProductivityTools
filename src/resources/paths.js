@@ -7,6 +7,7 @@ export const paths = {
     register: "/register",
     dashboard: "/dashboard",
     messages: "/messages",
+    motorcycles: "/motorcycles",
     posts: {
         basePath: "/posts",
         list: "/posts/list",

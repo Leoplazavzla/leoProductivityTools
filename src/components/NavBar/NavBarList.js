@@ -50,6 +50,11 @@ export default function NavBarList() {
                                 <ListItemText primary={Strings.navBar.logout}/>
                             </ListItemButton>
                         </ListItem>
+                        <ListItem disablepadding={"false"} button>
+                            <ListItemButton component="a" href={paths.motorcycles}>
+                                <ListItemText primary={Strings.navBar.motorcycles}/>
+                            </ListItemButton>
+                        </ListItem>
                     </List>
                 </nav>
             </Box>
