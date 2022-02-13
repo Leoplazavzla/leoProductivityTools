@@ -1,4 +1,3 @@
-import Strings from "../resources/Strings"
 
 export const paths = {
     home: "/",

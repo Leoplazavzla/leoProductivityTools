@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import NavBar from "./NavBar/NavBar";
 import {makeStyles} from "@material-ui/core/styles";
 import {Hidden} from "@material-ui/core";
-import {ThemeProvider} from "@material-ui/core"
 import NavigationDrawer from "./NavigationDrawer";
 import Routes from "../Routes";
 import {BrowserRouter} from "react-router-dom";

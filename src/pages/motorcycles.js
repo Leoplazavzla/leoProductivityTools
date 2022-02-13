@@ -1,26 +1,19 @@
 import React from "react"
-import {Box, Button, Grid} from "@mui/material";
-import MotorcycleBox from "../components/MotorcycleBox";
+import {Grid} from "@mui/material";
+import MUIDataTable from 'mui-datatables'
+import MotorcycleTableFormatter from '../tableFormatters/MotorcycleTableFormatter'
+import BaseLayout from "../BaseLayout";
 
-const times = ["8:00", "8:30", "9:00", "9:30", "10:00", "10:30"]
+const times = [{name: "8:00", label: "time"}, {name: "8:30", label: "time"}, {
+    name: "9:00",
+    label: "time"
+}, {name: "9:30", label: "time"}, {name: "10:00", label: "time"}, {name: "10:30", label: "time"}]
 
 const Motorcycles = () => {
     return (
-        <Grid container>
-            {times.map((t, i) => {
-                return (
-                    <Grid item xs={12}>
-                        <MotorcycleBox
-                            key={t.toString()}
-                            time={t}
-                        />
-                    </Grid>
+            <Grid container>
 
-                )
-                }
-            )}
-
-        </Grid>
+            </Grid>
     )
 }
 
