@@ -7,8 +7,10 @@ import {Button} from "@mui/material";
 import {createUserWithEmailAndPassword, onAuthStateChanged} from "firebase/auth"
 import {auth} from "../firebase/firebaseConfig"
 import {logOut, login} from "../Api/authentication"
+import {useNavigate} from"react-router-dom/"
 
 const Register = () => {
+    let navigate = useNavigate();
 
     const [registerEmail, setRegisterEmail] = useState("")
     const [registerPassword, setRegisterPassword] = useState("")
@@ -24,10 +26,10 @@ const Register = () => {
             auth,
             registerEmail,
             registerPassword)
-            console.log(user)
         } catch (error) {
             console.log(error);
         }
+        navigate("/login")
     }
 
     return(

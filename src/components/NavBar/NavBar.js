@@ -4,6 +4,8 @@ import {AppBar, Button, IconButton, Toolbar, Typography} from "@material-ui/core
 import {makeStyles} from "@material-ui/core/styles"
 import Strings from "../../resources/Strings"
 import {paths} from "../../resources/paths"
+import {Link} from "wouter";
+import {BrowserRouter, NavLink} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
         menuButton: {
@@ -44,8 +46,10 @@ const NavBar = (props) => {
                         {Strings.app.name}
                     </Button>
                 </Typography>
-                <Button variant={"text"} color={"inherit"}>{Strings.navBar.login}</Button>
-                <Button variant={"text"} color={"inherit"}>{Strings.navBar.register}</Button>
+
+                <Button href={paths.login} variant={"text"} color={"inherit"}>{Strings.navBar.login}</Button>
+                <Button href={paths.register} variant={"text"} color={"inherit"}>{Strings.navBar.register}</Button>
+
             </Toolbar>
         </AppBar>
     )
