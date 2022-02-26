@@ -7,22 +7,39 @@ import {Button} from "@mui/material";
 import {auth} from "../firebase/firebaseConfig"
 import {logOut, login} from "../Api/authentication"
 import {useNavigate} from "react-router-dom/";
+import {useAuth} from "../contexts/AuthContext"
+import Alert from '@mui/material/Alert';
 import {onAuthStateChanged} from "firebase/auth";
 
 const Login = () => {
     let navigate = useNavigate();
+    const {currentUser, logIn} = useAuth();
 
     const [loginEmail, setLoginEmail] = useState("")
     const [loginPassword, setLoginPassword] = useState("")
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [user, setUser] = useState({})
 
-    onAuthStateChanged(auth, (currentUser) => {
+    const singIn = async () => {
+        try{
+            setError(false)
+            setLoading(true)
+            await logIn(auth, loginEmail, loginPassword).then((navigate("/dashboard")))
+        }catch {
+            setError(true)
+        }
+    }
+    /*onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser)
-    })
+    })*/
 
     return(
         <BaseLayout>
             <Grid container direction="column" spacing={2}>
+                <Grid item>
+                    <div><h1>{Strings.login.name}</h1></div>
+                </Grid>
                 <Grid item>
                     <TextField
                         label={Strings.login.insertUserName}
@@ -40,6 +57,7 @@ const Login = () => {
                 <Grid item>
                     <TextField
                         label={Strings.login.insertPassword}
+                        type={"password"}
                         value={loginPassword || ''}
                         onChange={(e) => setLoginPassword(e.target.value)}
                         style={{width: '60%', paddingBottom: '15px'}}
@@ -50,27 +68,28 @@ const Login = () => {
                 </Grid>
                 <Grid item>
                     <Button
-                        onClick={() => {
-                            login(auth, loginEmail, loginPassword).then(navigate("/dashboard"));
-
-                        }}
+                        disabled={loading}
+                        onClick={singIn}
                     >
                         {Strings.login.signIn}
                     </Button>
-                    <Grid item>
-
-                    Don't have an account?
-
-                    <Button
-                        onClick={() => navigate("/register")}
-                    >
-                        {Strings.register.createAccount}
-                    </Button>
-                    </Grid>
                 </Grid>
+                    <Grid item>
+                                Don't have an account?
+                            <Button
+                                onClick={() => navigate("/register")}
+                            >
+                                {Strings.register.createAccount}
+                            </Button>
+                    </Grid>
                 </Grid>
         </BaseLayout>
     )
 }
 
 export default Login;
+
+/*
+onClick={() => {
+    // login(auth, registerEmail, registerPassword)
+}}*/

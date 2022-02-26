@@ -5,12 +5,14 @@ import Grid from "@material-ui/core/Grid"
 import Strings from "../resources/Strings";
 import {Button} from "@mui/material";
 import {auth} from "../firebase/firebaseConfig";
-import {useNavigate} from "react-router-dom/";
+import {useNavigate, Link} from "react-router-dom/";
+import Alert from '@mui/material/Alert';
 import {useAuth} from "../contexts/AuthContext";
 
 const Register = () => {
-    const {register, currentUser} = useAuth();
+    const {register, currentUser, logOut} = useAuth();
     let navigate = useNavigate();
+    console.log(currentUser)
 
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
@@ -20,18 +22,22 @@ const Register = () => {
     const [user, setUser] = useState(false);
 
     const handleSubmit = async () => {
+
         if(registerPassword !== confirmationPassword){
-            setError(true)
+            return setError(true)
         }
         try{
             setError(false)
             setLoading(true)
-            await register(auth, registerEmail, registerPassword)
+            await register(auth, registerEmail, registerPassword).then(navigate("/dashboard"))
         }catch{
             setError(true)
         }
         setLoading(false)
+    }
 
+    const signOut = () => {
+        logOut(auth)
     }
 
 
@@ -52,6 +58,10 @@ const Register = () => {
         <BaseLayout>
                 <Grid container direction="column" spacing={2}>
                     <Grid item>
+                        <div><h1>{Strings.register.name}</h1></div>
+                    </Grid>
+                    {error && <Alert severity={"error"}>{Strings.register.error}</Alert>}
+                    <Grid item>
                         <TextField
                             label={Strings.register.insertUserName}
                             value={registerEmail || ''}
@@ -67,6 +77,7 @@ const Register = () => {
                     <Grid item>
                         <TextField
                             label={Strings.register.insertPassword}
+                            type={"password"}
                             value={registerPassword || ''}
                             onChange={(e) => setRegisterPassword(e.target.value)}
                             style={{width: '60%', paddingBottom: '15px'}}
@@ -77,6 +88,7 @@ const Register = () => {
                     <Grid item>
                         <TextField
                             label={Strings.register.passwordConfirmation}
+                            type={"password"}
                             value={confirmationPassword || ''}
                             onChange={(e) => setConfirmationPassword(e.target.value)}
                             style={{width: '60%', paddingBottom: '15px'}}
@@ -94,22 +106,23 @@ const Register = () => {
                         </Button>
                         <Grid>
                             Already have an account?
-                            <Button onClick={() => {
-                                // login(auth, registerEmail, registerPassword)
-                            }}>
-                            Login
-                        </Button>
+                            <Link to= "/login">Login</Link>
                         </Grid>
 
                     </Grid>
                 </Grid>
+            <br/>
             <Grid item>
                 <TextField
                 value={`Hello ${currentUser?.email}`}
                 style={{width: '60%', paddingBottom: '15px'}}
                 error={false}>
-
                 </TextField>
+                <Button
+                    onClick={signOut}
+                >
+                    {Strings.navBar.logout}
+                </Button>
 
                 </Grid>
         </BaseLayout>

@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(3)
     },
     appBar: {
-        [theme.breakpoints.up('sm')]:{
+        [theme.breakpoints.up('sm')]: {
             width: `calc(100% - ${240}px)`,
             marginLeft: 240
         }
@@ -33,36 +33,37 @@ const Navigation = () => {
     }
 
 
-    return(
-        <div>
-            <NavBar
-                handleDrawerOpen={handleDrawerOpen}
-            />
-            <Hidden xsDown>
-                <NavigationDrawer
-                variant={"permanent"}
-                open={true}
+    return (
+        <BrowserRouter>
+            <div>
+                <NavBar
+                    handleDrawerOpen={handleDrawerOpen}
                 />
-            </Hidden>
-            <Hidden smUp>
-                <NavigationDrawer
-                    variant={"temporary"}
-                    open={open}
-                    onClose={handleDrawerOpen}
-                />
-            </Hidden>
+                <Hidden xsDown>
+                    <NavigationDrawer
+                        variant={"permanent"}
+                        open={true}
+                    />
+                </Hidden>
+                <Hidden smUp>
+                    <NavigationDrawer
+                        variant={"temporary"}
+                        open={open}
+                        onClose={handleDrawerOpen}
+                    />
+                </Hidden>
 
-            <div className={classes.appBar}>
-                <BrowserRouter>
-                <main className={classes.content}>
-                    <NavigationRoutes/>
-                </main>
-                </BrowserRouter>
+                <div className={classes.appBar}>
+                    <main className={classes.content}>
+                        <NavigationRoutes/>
+                    </main>
+
+
+                </div>
+
 
             </div>
-
-
-        </div>
+        </BrowserRouter>
     )
 }
 export default Navigation;

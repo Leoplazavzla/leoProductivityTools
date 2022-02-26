@@ -14,14 +14,17 @@ const Strings = () => {
                 motorcycles: "Motorcycles"
             },
             register: {
+                name: "Sign Up",
                 insertUserName: "Insert your email",
                 username: "Username",
                 insertPassword: "Insert your password",
                 passwordConfirmation: "Password confirmation",
                 password: "Password",
-                createAccount: "Create Account"
+                createAccount: "Create Account",
+                error: "The passwords don't match"
             },
             login: {
+                name: "Login",
                 insertUserName: "Insert your user name",
                 username: "Username",
                 insertPassword: "Insert your password",

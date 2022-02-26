@@ -12,12 +12,23 @@ import {Dashboard as DashboardIcon} from "@material-ui/icons"
 import DraftsIcon from '@material-ui/icons/Drafts';
 import Strings from "../../resources/Strings";
 import {paths} from "../../resources/paths"
+import {useAuth} from "../../contexts/AuthContext"
+import {auth} from "../../firebase/firebaseConfig"
+import {useNavigate} from "react-router-dom"
 
 export default function NavBarList() {
+
+    const {logOut, currentUser} = useAuth();
+    let navigate = useNavigate();
+
+    const signOut = () => {
+        logOut(auth).then(navigate("/login"))
+    }
+
     return (
 
             <Box sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
-                <nav aria-label="main mailbox folders">
+                {currentUser ? <nav aria-label="main mailbox folders">
                     <List>
                         <ListItem disablepadding={"false"} button>
                             <ListItemButton component="a" href={paths.dashboard}>
@@ -36,26 +47,39 @@ export default function NavBarList() {
                             </ListItemButton>
                         </ListItem>
                     </List>
-                </nav>
+                </nav> : <div></div>}
+
                 <Divider/>
                 <nav aria-label="secondary mailbox folders">
-                    <List>
-                        <ListItem disablepadding={"false"} color={"primary"} button>
-                            <ListItemButton component="a" href={paths.posts.new}>
-                                <ListItemText primary={Strings.navBar.new}/>
+
+                        {currentUser ?
+                            <List>
+                            <ListItem disablepadding={"false"} color={"primary"} button>
+                                <ListItemButton component="a" href={paths.posts.new}>
+                                    <ListItemText primary={Strings.navBar.new}/>
+                                </ListItemButton>
+                            </ListItem>
+                            <ListItem disablepadding={"false"} button>
+                                <ListItemButton component="a" href={paths.motorcycles}>
+                                    <ListItemText primary={Strings.navBar.motorcycles}/>
+                                </ListItemButton>
+                            </ListItem>
+                            <ListItem disablepadding={"false"} button>
+                            <ListItemButton  onClick={signOut} >
+                            <ListItemText primary={Strings.navBar.logout}/>
                             </ListItemButton>
-                        </ListItem>
-                        <ListItem disablepadding={"false"} button>
-                            <ListItemButton component="a" href={paths.logout}>
-                                <ListItemText primary={Strings.navBar.logout}/>
+                            </ListItem>
+                            </List>
+                            :
+                            <List>
+                            <ListItem disablepadding={"false"} button>
+                            <ListItemButton component="a" href={paths.register}>
+                            <ListItemText primary={Strings.register.name}/>
                             </ListItemButton>
-                        </ListItem>
-                        <ListItem disablepadding={"false"} button>
-                            <ListItemButton component="a" href={paths.motorcycles}>
-                                <ListItemText primary={Strings.navBar.motorcycles}/>
-                            </ListItemButton>
-                        </ListItem>
-                    </List>
+                            </ListItem>
+                            </List>
+                        }
+
                 </nav>
             </Box>
     );
