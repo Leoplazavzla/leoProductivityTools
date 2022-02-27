@@ -39,7 +39,7 @@ export default function NavBarList() {
                             </ListItemButton>
                         </ListItem>
                         <ListItem disablepadding={"false"} button>
-                            <ListItemButton component="a" href={paths.messages}>
+                            <ListItemButton component="a" href={paths.messages.basePath}>
                                 <ListItemIcon>
                                     <DraftsIcon/>
                                 </ListItemIcon>

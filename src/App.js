@@ -12,7 +12,6 @@ function App() {
                 <Navigation/>
             </AuthProvider>
 
-
         </ThemeProvider>
     );
 }

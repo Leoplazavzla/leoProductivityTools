@@ -19,9 +19,9 @@ import AlarmPage from "./pages/AlarmPage"
 const NavigationRoutes = () => {
     return(
         <Routes>
-            <Route exact path={paths.home} element={<Dashboard/>} />
+            <Route exact path={paths.home} element={<PrivateRoute> <Dashboard/> </PrivateRoute>} />
             <Route path={paths.dashboard} element={<Dashboard/>}/>
-            <Route path={`${paths.alarm.basePath}/:id`} element={<AlarmPage/>}/>
+            <Route path={paths.alarm.basePath} element={<AlarmPage/>}/>
             <Route path={paths.messages.basePath} element={<Messages/>}/>
             <Route path={paths.posts.new} element={<NewPost/>}/>
             <Route path={paths.login} element={<Login/>}/>

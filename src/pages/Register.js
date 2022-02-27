@@ -40,20 +40,6 @@ const Register = () => {
         logOut(auth)
     }
 
-
-
-    /*const register = async () => {
-        try{
-        const user = await createUserWithEmailAndPassword(
-            auth,
-            registerEmail,
-            registerPassword)
-        } catch (error) {
-            console.log(error);
-        }
-        navigate("/login")
-    }*/
-
     return(
         <BaseLayout>
                 <Grid container direction="column" spacing={2}>

@@ -32,7 +32,6 @@ const useStyles = makeStyles(theme => ({
 const NavBar = (props) => {
     const {currentUser, logOut} = useAuth();
     const classes = useStyles();
-    console.log(currentUser)
 
     return (
 
