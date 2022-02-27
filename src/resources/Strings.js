@@ -30,6 +30,11 @@ const Strings = () => {
                 insertPassword: "Insert your password",
                 password: "Password",
                 signIn: "Sign In"
+            },
+            alarm: {
+                name: "Alarms",
+                new: "New alarm"
+
             }
         }
     )

@@ -55,8 +55,8 @@ export default function NavBarList() {
                         {currentUser ?
                             <List>
                             <ListItem disablepadding={"false"} color={"primary"} button>
-                                <ListItemButton component="a" href={paths.posts.new}>
-                                    <ListItemText primary={Strings.navBar.new}/>
+                                <ListItemButton component="a" href={paths.alarm.basePath}>
+                                    <ListItemText primary={Strings.alarm.name}/>
                                 </ListItemButton>
                             </ListItem>
                             <ListItem disablepadding={"false"} button>

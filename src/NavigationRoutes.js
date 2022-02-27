@@ -1,5 +1,6 @@
 import React from "react";
 import {Routes, Route} from "react-router";
+import PrivateRoute from "./components/PrivateRoute"
 
 
 //Dashboard
@@ -13,13 +14,15 @@ import Register from "./pages/Register"
 import Logout from "./pages/Logout"
 import Motorcycles from "./pages/motorcycles"
 import ErrorPage from "./pages/ErrorPage";
+import AlarmPage from "./pages/AlarmPage"
 
 const NavigationRoutes = () => {
     return(
         <Routes>
-            <Route exact path={paths.home} element={<Register/>} />
+            <Route exact path={paths.home} element={<Dashboard/>} />
             <Route path={paths.dashboard} element={<Dashboard/>}/>
-            <Route path={paths.messages} element={<Messages/>}/>
+            <Route path={`${paths.alarm.basePath}/:id`} element={<AlarmPage/>}/>
+            <Route path={paths.messages.basePath} element={<Messages/>}/>
             <Route path={paths.posts.new} element={<NewPost/>}/>
             <Route path={paths.login} element={<Login/>}/>
             <Route path={paths.register} element={<Register/>}/>

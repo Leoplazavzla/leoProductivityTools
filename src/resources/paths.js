@@ -5,7 +5,13 @@ export const paths = {
     logout: "/logout",
     register: "/register",
     dashboard: "/dashboard",
-    messages: "/messages",
+    messages: {
+        basePath: "/messages"
+    },
+    alarm: {
+        basePath: "/alarm",
+        new: "/alarm/new",
+    },
     motorcycles: "/motorcycles",
     posts: {
         basePath: "/posts",
