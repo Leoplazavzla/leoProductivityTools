@@ -12,6 +12,9 @@ export const paths = {
         basePath: "/alarm",
         new: "/alarm/new",
     },
+    pictures: {
+        basePath: "/pictures",
+    },
     motorcycles: "/motorcycles",
     posts: {
         basePath: "/posts",

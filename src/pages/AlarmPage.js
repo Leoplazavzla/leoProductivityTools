@@ -29,7 +29,6 @@ const AlarmPage = () => {
             <Container className={classes.container}>
                 <Box
                     sx={{
-                            marginTop: 8,
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
@@ -38,11 +37,20 @@ const AlarmPage = () => {
                         Alarm
                     </Typography>
                         <DateTimePicker
-                            label="Date&Time picker"
+                            label="Date & Time picker"
                             value={value}
                             onChange={handleChange}
                             renderInput={(params) => <TextField {...params} />}
                         />
+
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                    >
+                        Add Alarm
+                    </Button>
 
 
                 </Box>

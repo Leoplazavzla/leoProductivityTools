@@ -15,6 +15,7 @@ import Logout from "./pages/Logout"
 import Motorcycles from "./pages/motorcycles"
 import ErrorPage from "./pages/ErrorPage";
 import AlarmPage from "./pages/AlarmPage"
+import Pictures from "./pages/PicturesPage";
 
 const NavigationRoutes = () => {
     return(
@@ -22,6 +23,7 @@ const NavigationRoutes = () => {
             <Route exact path={paths.home} element={<PrivateRoute> <Dashboard/> </PrivateRoute>} />
             <Route path={paths.dashboard} element={<Dashboard/>}/>
             <Route path={paths.alarm.basePath} element={<AlarmPage/>}/>
+            <Route path={paths.pictures.basePath} element={<Pictures/>}/>
             <Route path={paths.messages.basePath} element={<Messages/>}/>
             <Route path={paths.posts.new} element={<NewPost/>}/>
             <Route path={paths.login} element={<Login/>}/>

@@ -35,6 +35,11 @@ const Strings = () => {
                 name: "Alarms",
                 new: "New alarm"
 
+            },
+            pictures: {
+                name: "Pictures",
+                new: "New Picture"
+
             }
         }
     )
