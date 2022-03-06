@@ -1,11 +1,9 @@
 import React, {useContext, useState, useEffect} from "react";
 import {useAuth} from "./AuthContext"
-import { doc, getDoc, setDoc } from "firebase/firestore/lite";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import db from "../firebase/firebaseConfig"
 
-
 const PicturesContext = React.createContext(1)
-
 
 export function usePicture() {
     return useContext(PicturesContext)
@@ -23,33 +21,42 @@ export function PicturesProvider({children}) {
     const [loading, setLoading] = useState(true);
     const [pictureArray, setPictureArray] = useState(null);
 
-    const searchOrCreateDoc = async () => {
-        const docRef = await doc(db, "users", currentUser.email);
-        const consult = await getDoc(docRef);
+    const deletePictures = async (pictureId, userEmail) => {
+        const newPictureArray = pictureArray.filter(
+            (object) => object.id !== pictureId
+        );
+        const docRef = doc(db, "users", userEmail);
+        updateDoc(docRef, {picture: [...newPictureArray]});
+        setPictureArray(newPictureArray)
 
+    }
 
-        if(consult.exists()){
-            const docData = consult.data()
-            return docData.picture
+    const searchOrCreateDoc = async (email) => {
+        const docRef = await doc(db, "users", email);
+        const docSnap = await getDoc(docRef);
+
+        if(docSnap.exists()){
+            const docData = docSnap.data();
+            return docData.picture;
         }else{
-            await setDoc(doc(db, "users", currentUser.email), {picture: [...fakeData]})
-            const consult = await getDoc(docRef);
-            const docData = consult.data()
-            return docData.picture
+            await setDoc(docRef, {picture: [...fakeData]})
+            const docSnap = await getDoc(docRef);
+            const docData = docSnap.data()
+            return docData.picture;
         }
     }
 
 
     useEffect(() => {
         const fetchPictures = async() => {
-            const fetchedPictures = await searchOrCreateDoc()
-            setPictureArray(fetchedPictures);
-            console.log("pictureArray is: ", pictureArray)
+            const fetchedPictures = await searchOrCreateDoc(currentUser.email)
+            await setPictureArray(fetchedPictures)
             setLoading(false)
+            return fetchedPictures
+
         }
-        fetchPictures().then(() => {
-            console.log("error")
-        });
+        fetchPictures();
+
 
     }, [])
 
@@ -57,6 +64,7 @@ export function PicturesProvider({children}) {
 
     const value = {
         pictureArray,
+        deletePictures,
 
     }
 

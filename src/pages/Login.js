@@ -30,9 +30,6 @@ const Login = () => {
             setError(true)
         }
     }
-    /*onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser)
-    })*/
 
     return(
         <BaseLayout>

@@ -1,10 +1,12 @@
 import React from "react"
-
+import {Container, TextField, Button, Grid } from "@mui/material";
+import {Form} from "@material-ui/core/"
 const AddPicture = () => {
     return(
-        <div>
+        <>
+
             Add a picture
-        </div>
+        </>
     )
 }
 export default AddPicture;
