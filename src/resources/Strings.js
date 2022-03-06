@@ -38,7 +38,10 @@ const Strings = () => {
             },
             pictures: {
                 name: "Pictures",
-                new: "New Picture"
+                new: "New Picture",
+                addPicture: "Add Picture",
+                uploadPicture: "Upload Picture",
+                selectFile: "Select File",
 
             }
         }

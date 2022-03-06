@@ -26,7 +26,7 @@ export function PicturesProvider({children}) {
             (object) => object.id !== pictureId
         );
         const docRef = doc(db, "users", userEmail);
-        updateDoc(docRef, {picture: [...newPictureArray]});
+        await updateDoc(docRef, {picture: [...newPictureArray]});
         setPictureArray(newPictureArray)
 
     }
