@@ -41,7 +41,7 @@ const Strings = () => {
                 new: "New Picture",
                 addPicture: "Add Picture",
                 uploadPicture: "Upload Picture",
-                selectFile: "Select File",
+                selectFile: "Select Image",
 
             }
         }

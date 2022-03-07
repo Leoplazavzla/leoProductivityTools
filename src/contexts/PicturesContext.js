@@ -1,7 +1,9 @@
 import React, {useContext, useState, useEffect} from "react";
 import {useAuth} from "./AuthContext"
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import db from "../firebase/firebaseConfig"
+import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
+import {bucket} from "../firebase/firebaseConfig";
+import db from "../firebase/firebaseConfig";
 
 const PicturesContext = React.createContext(1)
 
@@ -20,6 +22,7 @@ export function PicturesProvider({children}) {
 
     const [loading, setLoading] = useState(true);
     const [pictureArray, setPictureArray] = useState(null);
+    const [fileURL, setFileURL] = useState("");
 
     const deletePictures = async (pictureId, userEmail) => {
         const newPictureArray = pictureArray.filter(
@@ -28,6 +31,27 @@ export function PicturesProvider({children}) {
         const docRef = doc(db, "users", userEmail);
         await updateDoc(docRef, {picture: [...newPictureArray]});
         setPictureArray(newPictureArray)
+
+    }
+
+    const addPicture = async (name, userEmail) => {
+        console.log("hellohello")
+        const newPictureArray = [...pictureArray, {id: + new Date() , name: name , url: "https://picsum.photos/420"}]
+
+        const docRef = doc(db, "users", userEmail);
+        await updateDoc(docRef, {picture: [...newPictureArray]})
+        setPictureArray(newPictureArray)
+
+    }
+
+    const uploadPicture = async (file) => {
+        const localFile = file;
+        const fileRef = ref(bucket, `documents/S(localFile.name)`);
+
+        await uploadBytes(fileRef, localFile);
+        const DownloadUrl = await getDownloadURL(fileRef)
+        setFileURL(DownloadUrl)
+
 
     }
 
@@ -65,6 +89,10 @@ export function PicturesProvider({children}) {
     const value = {
         pictureArray,
         deletePictures,
+        addPicture,
+        fileURL,
+        uploadPicture
+
 
     }
 

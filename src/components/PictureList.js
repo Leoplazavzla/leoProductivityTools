@@ -17,9 +17,7 @@ const PictureList = () => {
                         {pictureArray.map((pictureObject) => {
                             return (
                                 <TableRow key={pictureObject.id}>
-                                    <TableCell>{pictureObject.id}</TableCell>
                                     <TableCell>{pictureObject.name}</TableCell>
-                                    <TableCell>{pictureObject.url}</TableCell>
                                     <TableCell><Button >See file</Button> </TableCell>
                                     <TableCell><Button >Download File</Button> </TableCell>
                                     <TableCell><Button >Copy URL</Button> </TableCell>

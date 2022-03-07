@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {useAuth} from "../contexts/AuthContext"
 import {usePicture} from "../contexts/PicturesContext";
 import {Container, TextField, Button, Grid, Typography, Box, Avatar} from "@mui/material";
@@ -9,10 +9,25 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 const AddPicture = () => {
 
     const {currentUser} = useAuth();
+    const {addPicture, uploadPicture} = usePicture();
+    const [name, setName] = useState("");
+    const [file, setFile] = useState(null);
+
+    const getPictureName = (event) => {
+        setName(event.target.value)
+    }
 
 
-    const handleSubmit = () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await addPicture(name, currentUser.email)
+        setName("")
+    }
 
+    const handleUploadFile = async (e) => {
+        const uploadFile = e.target.files[0]
+        await setFile(uploadFile)
+        await uploadPicture(uploadFile)
     }
 
     return(
@@ -34,7 +49,6 @@ const AddPicture = () => {
                     </Typography>
                     <Box
                         component="form"
-                        onSubmit={handleSubmit}
                         noValidate
                         sx={{ mt: 1 }}
                     >
@@ -42,25 +56,41 @@ const AddPicture = () => {
                             margin="normal"
                             required
                             fullWidth
-                            id="email"
+                            id="name"
+                            value={name}
+                            onChange={getPictureName}
                             label="Picture Name"
                             name="pictureName"
                             autoComplete="pictureName"
                             autoFocus
                         />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3 }}
-                        >
-                            {Strings.pictures.selectFile}
-                        </Button>
+                        <input
+                            accept="image/*"
+                            style={{ display: 'none' }}
+                            id="raised-button-file"
+                            multiple
+                            type="file"
+                        />
+                        <label htmlFor="raised-button-file">
+                            <Button
+                                fullWidth
+                                type={"file"}
+                                variant="contained"
+                                color={"secondary"}
+                                sx={{ mt: 3 }}
+                                onChange={handleUploadFile}
+                                component={"span"}
+                            >
+                                {Strings.pictures.selectFile}
+                            </Button>
+                        </label>
+
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
+                            onClick={handleSubmit}
                         >
                             {Strings.pictures.uploadPicture}
                         </Button>
@@ -69,7 +99,22 @@ const AddPicture = () => {
                 </Box>
             </Container>
             <br/>
+            <br/>
+            <hr/>
         </>
     )
 }
 export default AddPicture;
+
+/*
+<Button
+    fullWidth
+    type={"file"}
+    variant="contained"
+    color={"secondary"}
+    sx={{ mt: 3 }}
+    onClick={handleUploadFile}
+    component={"span"}
+>
+    {Strings.pictures.selectFile}
+</Button>*/
