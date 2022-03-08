@@ -14,7 +14,7 @@ import Strings from "../../resources/Strings";
 import {paths} from "../../resources/paths"
 import {useAuth} from "../../contexts/AuthContext"
 import {auth} from "../../firebase/firebaseConfig"
-import {useNavigate} from "react-router-dom"
+import {useNavigate, NavLink} from "react-router-dom"
 
 export default function NavBarList() {
 
@@ -39,12 +39,12 @@ export default function NavBarList() {
                             </ListItemButton>
                         </ListItem>
                         <ListItem disablepadding={"false"} button>
-                            <ListItemButton component="a" href={paths.messages.basePath}>
+                            <NavLink to={paths.messages.basePath}>
                                 <ListItemIcon>
                                     <DraftsIcon/>
                                 </ListItemIcon>
                                 <ListItemText primary={Strings.navBar.messages}/>
-                            </ListItemButton>
+                            </NavLink>
                         </ListItem>
                     </List>
                 </nav> : <div></div>}
@@ -55,14 +55,14 @@ export default function NavBarList() {
                         {currentUser ?
                             <List>
                             <ListItem disablepadding={"false"} color={"primary"} button>
-                                <ListItemButton component="a" href={paths.alarm.basePath}>
+                                <NavLink to={paths.alarm.basePath}>
                                     <ListItemText primary={Strings.alarm.name}/>
-                                </ListItemButton>
+                                </NavLink>
                             </ListItem>
                             <ListItem disablepadding={"false"} color={"primary"} button>
-                                <ListItemButton component="a" href={paths.pictures.basePath}>
+                                <NavLink to={paths.pictures.basePath}>
                                     <ListItemText primary={Strings.pictures.name}/>
-                                </ListItemButton>
+                                </NavLink>
                             </ListItem>
                             <ListItem disablepadding={"false"} button>
                             <ListItemButton  onClick={signOut} >

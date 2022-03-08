@@ -25,8 +25,8 @@ const NavigationDrawer = (props) => {
             onClose={props.onClose ? props.onClose : null}
 
         >
-            <div className={classes.toolbar}>
-            </div>
+            {/*<div className={classes.toolbar}>
+            </div>*/}
             <Divider/>
             <NavBarList/>
         </Drawer>

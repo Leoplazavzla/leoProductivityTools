@@ -35,7 +35,6 @@ export function PicturesProvider({children}) {
     }
 
     const addPicture = async (name, userEmail) => {
-        console.log("hellohello")
         const newPictureArray = [...pictureArray, {id: + new Date() , name: name , url: "https://picsum.photos/420"}]
 
         const docRef = doc(db, "users", userEmail);

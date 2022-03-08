@@ -33,7 +33,8 @@ const Strings = () => {
             },
             alarm: {
                 name: "Alarms",
-                new: "New alarm"
+                new: "New Alarm",
+                delete: "Delete Alarm"
 
             },
             pictures: {

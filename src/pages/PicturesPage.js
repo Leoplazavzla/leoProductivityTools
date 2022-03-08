@@ -11,7 +11,6 @@ const Pictures = () => {
     })
 
     return(
-        <>
             <Container>
                 <PicturesProvider>
                     <AddPicture/>
@@ -19,7 +18,6 @@ const Pictures = () => {
                     {/*{pictureArray ? : <div>Could not find any pictures</div>}*/}
                 </PicturesProvider>
             </Container>
-        </>
     )
 }
 export default Pictures;

@@ -12,27 +12,31 @@ const PictureList = () => {
     return (
         <>
             <Container>
-                <Table>
-                    <TableBody>
-                        {pictureArray.map((pictureObject) => {
-                            return (
-                                <TableRow key={pictureObject.id}>
-                                    <TableCell>{pictureObject.name}</TableCell>
-                                    <TableCell><Button >See file</Button> </TableCell>
-                                    <TableCell><Button >Download File</Button> </TableCell>
-                                    <TableCell><Button >Copy URL</Button> </TableCell>
-                                    <TableCell>
-                                        <Button
-                                            onClick={() => deletePictures(pictureObject.id, currentUser.email)}
-                                        >
-                                            Delete Picture
-                                        </Button> </TableCell>
-                                </TableRow>
-                            )
-                        })}
-                    </TableBody>
+                {pictureArray ?
+                    <Table>
+                        <TableBody>
+                            {pictureArray.map((pictureObject) => {
+                                return (
+                                    <TableRow key={pictureObject.id}>
+                                        <TableCell>{pictureObject.name}</TableCell>
+                                        <TableCell><Button >See file</Button> </TableCell>
+                                        <TableCell><Button >Download File</Button> </TableCell>
+                                        <TableCell><Button >Copy URL</Button> </TableCell>
+                                        <TableCell>
+                                            <Button
+                                                onClick={() => deletePictures(pictureObject.id, currentUser.email)}
+                                            >
+                                                Delete Picture
+                                            </Button> </TableCell>
+                                    </TableRow>
+                                )
+                            })}
+                        </TableBody>
 
-                </Table>
+                    </Table>
+                    :
+                    <div>No pictures yet</div>}
+
 
 
 

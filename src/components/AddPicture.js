@@ -105,16 +105,3 @@ const AddPicture = () => {
     )
 }
 export default AddPicture;
-
-/*
-<Button
-    fullWidth
-    type={"file"}
-    variant="contained"
-    color={"secondary"}
-    sx={{ mt: 3 }}
-    onClick={handleUploadFile}
-    component={"span"}
->
-    {Strings.pictures.selectFile}
-</Button>*/
