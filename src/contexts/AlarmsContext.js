@@ -10,14 +10,14 @@ export function useAlarm() {
 }
 
 export function AlarmProvider({children}) {
+    const {currentUser} = useAuth();
 
     const fakeData = [
-        {id: 1, name: "first alarm", date: "new Date()"},
-        {id: 2, name: "Second Alarm", date: "new Date()"},
-        {id: 3, name: "Third Alarm", date: "new Date()"}
+        {id: 1, name: "first alarm", date: new Date()},
+        {id: 2, name: "Second Alarm", date: new Date()},
+        {id: 3, name: "Third Alarm", date: new Date()}
     ];
 
-    const {currentUser} = useAuth();
     const [loading, setLoading] = useState(true);
     const [alarmArray, setAlarmArray] = useState(null);
 
@@ -28,7 +28,7 @@ export function AlarmProvider({children}) {
 
         if (docSnap.exists()) {
             const docData = docSnap.data();
-            return docData.picture;
+            return docData.alarm;
         } else {
             await setDoc(docRef, {alarm: [...fakeData]})
             const docSnap = await getDoc(docRef);
@@ -39,14 +39,15 @@ export function AlarmProvider({children}) {
 
     useEffect(() => {
         const fetchAlarms = async () => {
-            const fetchedAlarms = await searchOrCreateDoc(currentUser.email)
+            const fetchedAlarms = await searchOrCreateDoc(currentUser.email);
             await setAlarmArray(fetchedAlarms)
             setLoading(false)
-            console.log(alarmArray)
             return fetchedAlarms
 
         }
-        fetchAlarms().then(() => console.log(alarmArray));
+        fetchAlarms().then(() => {
+
+        })
     }, [])
 
     const addAlarm = async (name, userEmail, date) => {
@@ -57,8 +58,13 @@ export function AlarmProvider({children}) {
         setAlarmArray(newAlarmArray)
     }
 
-    const deleteAlarm = () => {
-        console.log("alarm deleted")
+    const deleteAlarm = async (alarmId, userEmail) => {
+        const newAlarmArray = alarmArray.filter(
+            (object) => object.id !== alarmId
+        );
+        const docRef = doc(db, "alarms", userEmail);
+        await updateDoc(docRef, {alarm: [...newAlarmArray]});
+        setAlarmArray(newAlarmArray)
     }
 
 

@@ -28,7 +28,8 @@ export default function NavBarList() {
     return (
 
             <Box sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
-                {currentUser ? <nav aria-label="main mailbox folders">
+                {currentUser ?
+                    <nav aria-label="main mailbox folders">
                     <List>
                         <ListItem disablepadding={"false"} button>
                             <ListItemButton component="a" href={paths.dashboard}>

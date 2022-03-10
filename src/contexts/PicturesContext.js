@@ -14,6 +14,7 @@ export function usePicture() {
 export function PicturesProvider({children}) {
     const {currentUser} = useAuth();
 
+
     const fakeData = [
         {id: 1, name: "first picture", url:"https://picsum.photos/420"},
         {id: 2, name: "Second picture", url:"https://picsum.photos/420"},

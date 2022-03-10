@@ -8,32 +8,30 @@ import Strings from "../../resources/Strings";
 const AlarmList = () => {
     const {currentUser} = useAuth();
     const {alarmArray, deleteAlarm} = useAlarm();
-    console.log(alarmArray)
 
     return(
         <>
             <Container>
-                {alarmArray ?
+                {alarmArray?
                     <Table>
-                    <TableBody>
-                        {alarmArray.map((alarmObject) => {
-                            return (
-                                <TableRow key={alarmObject.id}>
-                                    <TableCell>{alarmObject.name}</TableCell>
-                                    <TableCell>
-                                        <Button
-                                            onClick={() => deleteAlarm(alarmObject.id, currentUser.email)}
-                                        >
-                                            {Strings.alarm.delete}
-                                        </Button> </TableCell>
-                                </TableRow>
-                            )
-                        })}
-                    </TableBody>
+                        <TableBody>
+                            {alarmArray.map((alarmObject) => {
+                                return (
+                                    <TableRow key={alarmObject.id}>
+                                        <TableCell>{alarmObject.name}</TableCell>
+                                        <TableCell>
+                                            <Button
+                                                onClick={() => deleteAlarm(alarmObject.id, currentUser.email)}
+                                            >
+                                                {Strings.alarm.delete}
+                                            </Button> </TableCell>
+                                    </TableRow>
+                                )
+                            })}
+                        </TableBody>
                     </Table>
                 :
-                <div>No alarms yet</div>
-                }
+                <div>No alarms yet to show</div>}
 
 
             </Container>
