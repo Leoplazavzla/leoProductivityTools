@@ -20,6 +20,8 @@ export function AlarmProvider({children}) {
 
     const [loading, setLoading] = useState(true);
     const [alarmArray, setAlarmArray] = useState(null);
+    const [currentTime, setCurrentTime] = useState("");
+
 
 
     const searchOrCreateDoc = async (email) => {
@@ -37,7 +39,16 @@ export function AlarmProvider({children}) {
         }
     }
 
+    const formatTime = (value) => {
+        if(value < 10){
+            return '0';
+        }else {
+            return '';
+        }
+    }
+
     useEffect(() => {
+
         const fetchAlarms = async () => {
             const fetchedAlarms = await searchOrCreateDoc(currentUser.email);
             await setAlarmArray(fetchedAlarms)
@@ -49,6 +60,30 @@ export function AlarmProvider({children}) {
 
         })
     }, [])
+
+    const tick = () => {
+        const date = new Date();
+        const hour = date.getHours();
+        const minute = date.getMinutes();
+        const seconds = date.getSeconds();
+        const actualTime = formatTime(hour) + hour + ':' + formatTime(minute) + minute + ':' + formatTime(seconds) + seconds
+
+
+        setCurrentTime(actualTime)
+
+    }
+
+    useEffect(() => {
+        const timerId = setInterval(() => {
+            tick()
+        }, 1000)
+
+        return function cleanup() {
+            clearInterval(timerId)
+        }
+
+        }, [])
+
 
     const addAlarm = async (name, userEmail, date) => {
         const newAlarmArray = [...alarmArray, {id: +new Date(), name: name, date: date}]
@@ -70,6 +105,7 @@ export function AlarmProvider({children}) {
 
     const value = {
         alarmArray,
+        currentTime,
         addAlarm,
         deleteAlarm,
         searchOrCreateDoc,

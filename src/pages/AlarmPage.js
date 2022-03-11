@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 const AlarmPage = () => {
 
+
     return(
             <BaseLayout>
                 <AlarmProvider>
