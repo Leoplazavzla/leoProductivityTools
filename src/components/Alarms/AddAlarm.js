@@ -3,18 +3,23 @@ import {useAuth} from "../../contexts/AuthContext"
 import {useAlarm} from "../../contexts/AlarmsContext"
 import {useParams} from "react-router-dom";
 import {Container, TextField, Button, Grid, Typography, Box, Avatar} from "@mui/material";
+import PianoAlarm from "../../pianoAlarm.mp3"
 import TimePicker from "@mui/lab/TimePicker";
 import AlarmIcon from '@mui/icons-material/Alarm';
 import Strings from "../../resources/Strings";
+import {Howl, Howler} from "howler"
 
 const AddAlarm = () => {
 
     const {currentUser} = useAuth();
-    const {currentTime} = useAlarm();
+    const {currentTime, addAlarm} = useAlarm();
     let currTimeMilSec = undefined;
+    const alarmSound = PianoAlarm;
     let alarmMilSec;
+    let alarmTimeOut;
     const params = useParams();
     const [value, setValue] = useState(new Date());
+    const [alarmName, setAlarmName] = useState("");
     const [newDate, setNewDate] = useState();
     const [userAlarm, setUserAlarm] = useState({hour: null, minute: null})
     const [currTime, setCurrTime] = useState({hour: undefined, minute: undefined})
@@ -45,6 +50,13 @@ const AddAlarm = () => {
 
     }
 
+    const playAlarmSound = (src) => {
+        const sound = new Howl({
+            src
+        })
+        sound.play();
+    }
+
     const setAlarm = () => {
         const alarmHour = userAlarm.hour
         const alarmMinute = userAlarm.minute
@@ -54,12 +66,10 @@ const AddAlarm = () => {
         currTimeToMilSec(currHour, currMinute);
         if(alarmMilSec > currTimeMilSec){
             const timeOut = alarmMilSec - currTimeMilSec;
-            //alarmTimeOut = setTimeout(() => , timeOut)
+            alarmTimeOut = setTimeout(() => {
+                playAlarmSound(alarmSound)
+             }, timeOut)
         }
-
-
-
-
 
     }
 
@@ -67,15 +77,21 @@ const AddAlarm = () => {
 
     })
 
-    const handleSubmit = (e) => {
+    const getAlarmName = (event) => {
+        setAlarmName(event.target.value)
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
         setAlarm()
+        await addAlarm(alarmName, currentUser.email, value)
+        setAlarmName("")
+        Howler.volume(1.0)
 
     }
 
     return(
             <Container >
-
                 <div>
                     {currentTime}
                 </div>
@@ -96,8 +112,21 @@ const AddAlarm = () => {
                         noValidate
                         sx={{ mt: 1 }}
                     >
+                        <TextField
+                            margin="normal"
+                            sx={{ mb: 2 }}
+                            required
+                            fullWidth
+                            id="name"
+                            value={alarmName}
+                            onChange={getAlarmName}
+                            label="Alarm Description"
+                            name="alarmDescription"
+                            autoFocus
+                        />
+
                         <TimePicker
-                            label="Date & Time picker"
+                            label="Time picker"
                             value={value}
                             onChange={handleChange}
                             renderInput={(params) => <TextField {...params} fullWidth sx={{ mb: 1 }}/>}

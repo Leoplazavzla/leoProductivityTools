@@ -1,13 +1,17 @@
 import React, {useState} from "react"
 import {Container, Stack, TextField, Button, Grid} from "@mui/material";
 import {TableBody, TableCell, TableHead, Table, TableRow} from "@material-ui/core";
+import PianoAlarm from "../../pianoAlarm.mp3"
 import {useAlarm} from "../../contexts/AlarmsContext";
 import {useAuth} from "../../contexts/AuthContext"
 import Strings from "../../resources/Strings";
 
+
 const AlarmList = () => {
     const {currentUser} = useAuth();
     const {alarmArray, deleteAlarm} = useAlarm();
+
+
 
     return(
         <>
@@ -21,7 +25,11 @@ const AlarmList = () => {
                                         <TableCell>{alarmObject.name}</TableCell>
                                         <TableCell>
                                             <Button
-                                                onClick={() => deleteAlarm(alarmObject.id, currentUser.email)}
+                                                onClick={(e) => {
+                                                    e.preventDefault()
+                                                    deleteAlarm(alarmObject.id, currentUser.email)
+
+                                                }}
                                             >
                                                 {Strings.alarm.delete}
                                             </Button> </TableCell>

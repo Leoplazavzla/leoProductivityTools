@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from "react";
 import {doc, getDoc, setDoc, updateDoc} from "firebase/firestore";
 import db from "../firebase/firebaseConfig";
 import {useAuth} from "./AuthContext"
+import {Howl, Howler} from "howler";
 
 const AlarmContext = React.createContext(1);
 
@@ -89,7 +90,7 @@ export function AlarmProvider({children}) {
         const newAlarmArray = [...alarmArray, {id: +new Date(), name: name, date: date}]
 
         const docRef = doc(db, "alarms", userEmail);
-        await updateDoc(docRef, {picture: [...newAlarmArray]})
+        await updateDoc(docRef, {alarm: [...newAlarmArray]})
         setAlarmArray(newAlarmArray)
     }
 
@@ -100,6 +101,14 @@ export function AlarmProvider({children}) {
         const docRef = doc(db, "alarms", userEmail);
         await updateDoc(docRef, {alarm: [...newAlarmArray]});
         setAlarmArray(newAlarmArray)
+    }
+
+
+    const stopAlarmSound = (src) => {
+        const sound = new Howl({
+            src
+        })
+        sound.stop();
     }
 
 
