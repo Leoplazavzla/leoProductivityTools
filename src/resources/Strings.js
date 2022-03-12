@@ -47,6 +47,10 @@ const Strings = () => {
                 uploadPicture: "Upload Picture",
                 selectFile: "Select Image",
 
+            },
+            dashboard: {
+                title: "Welcome to Leo's PM Tools",
+                paragraph1: "This is my ReactJS webApp created to hold all the tools I use in my day-to-day work. I'll be adding new features in the future :-)"
             }
         }
     )
