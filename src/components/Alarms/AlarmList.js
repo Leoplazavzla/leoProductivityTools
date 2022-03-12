@@ -27,8 +27,9 @@ const AlarmList = () => {
                                                 onClick={(e) => {
                                                     e.preventDefault()
                                                     deleteAlarm(alarmObject.id, currentUser.email)
-                                                    stopAlarmSound(alarmSound)
-
+                                                    if(alarmSound){
+                                                        stopAlarmSound(alarmSound)
+                                                    }
                                                 }}
                                             >
                                                 {Strings.alarm.delete}

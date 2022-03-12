@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from "react"
+import React, {useState} from "react"
 import {useAuth} from "../../contexts/AuthContext"
 import {useAlarm} from "../../contexts/AlarmsContext"
 import {useParams} from "react-router-dom";
-import {Container, TextField, Button, Grid, Typography, Box, Avatar} from "@mui/material";
+import {Avatar, Box, Button, Container, TextField, Typography} from "@mui/material";
 import PianoAlarm from "../../pianoAlarm.mp3"
 import TimePicker from "@mui/lab/TimePicker";
 import AlarmIcon from '@mui/icons-material/Alarm';
 import Strings from "../../resources/Strings";
-import {Howl, Howler} from "howler"
+import {Howler} from "howler"
 
 const AddAlarm = () => {
 
@@ -34,15 +34,15 @@ const AddAlarm = () => {
         setUserAlarm({hour: alarmHour, minute: alarmMinute})
     };
 
-    const alarmToMilliseconds = (alarmHour, alarmMinute, ) => {
-        const alarmHourToMilSec = ((alarmHour*60)*60)*1000
-        const alarmMinuteToMilSec = (alarmMinute*60)*1000
+    const alarmToMilliseconds = (alarmHour, alarmMinute,) => {
+        const alarmHourToMilSec = ((alarmHour * 60) * 60) * 1000
+        const alarmMinuteToMilSec = (alarmMinute * 60) * 1000
         return alarmMilSec = alarmHourToMilSec + alarmMinuteToMilSec
     }
 
     const currTimeToMilSec = (currHour, currMinute) => {
-        const currHourToMilSec = ((currHour*60)*60)*1000
-        const currMinuteToMilSec = (currMinute*60)*1000
+        const currHourToMilSec = ((currHour * 60) * 60) * 1000
+        const currMinuteToMilSec = (currMinute * 60) * 1000
         return currTimeMilSec = currHourToMilSec + currMinuteToMilSec
     }
 
@@ -53,11 +53,11 @@ const AddAlarm = () => {
         const currMinute = currTime.minute
         alarmToMilliseconds(alarmHour, alarmMinute);
         currTimeToMilSec(currHour, currMinute);
-        if(alarmMilSec > currTimeMilSec){
+        if (alarmMilSec > currTimeMilSec) {
             const timeOut = alarmMilSec - currTimeMilSec;
             alarmTimeOut = setTimeout(() => {
                 playAlarmSound(alarmSound)
-             }, timeOut)
+            }, timeOut)
         }
     }
 
@@ -73,36 +73,38 @@ const AddAlarm = () => {
         Howler.volume(1.0)
     }
 
-    return(
+    return (
+        <>
             <Container component="main" maxWidth="xs">
-                <Typography
-                    component="h1"
-                    variant="h1"
-                    sx={{mt: 2, ml: 1}}
-                >
-                    {currentTime}
-                </Typography>
+
                 <Box
                     sx={{
-                        marginTop: 8,
+                        marginTop: 3,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                     }}>
+                    <Typography
+                        component="h1"
+                        variant="h1"
+                        sx={{mt: 2, ml: 1}}
+                    >
+                        {currentTime}
+                    </Typography>
                     <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
                         <AlarmIcon/>
                     </Avatar>
-                    <Typography component="h1" variant="h5" sx={{mt: 2, mb: 1}}>
+                    <Typography component="h1" variant="h5" sx={{mt: 1}}>
                         {Strings.alarm.new}
                     </Typography>
                     <Box
                         component="form"
                         noValidate
-                        sx={{ mt: 1 }}
+                        sx={{mt: 1}}
                     >
                         <TextField
                             margin="normal"
-                            sx={{ mb: 2 }}
+                            sx={{mb: 2}}
                             fullWidth
                             id="name"
                             value={alarmName}
@@ -116,14 +118,14 @@ const AddAlarm = () => {
                             label={Strings.alarm.timePickerlabel}
                             value={value}
                             onChange={handleChange}
-                            renderInput={(params) => <TextField {...params} fullWidth sx={{ mb: 1 }}/>}
+                            renderInput={(params) => <TextField {...params} fullWidth sx={{mb: 1}}/>}
                         />
 
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mb: 2 }}
+                            sx={{mb: 4}}
                             onClick={handleSubmit}
                         >
                             {Strings.alarm.addAlarm}
@@ -131,6 +133,8 @@ const AddAlarm = () => {
                     </Box>
                 </Box>
             </Container>
+            <hr/>
+        </>
     )
 }
 
