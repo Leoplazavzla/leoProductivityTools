@@ -77,7 +77,7 @@ const AddPicture = () => {
                                 type={"file"}
                                 variant="contained"
                                 color={"secondary"}
-                                sx={{ mt: 3 }}
+                                sx={{ mt: 1 }}
                                 onChange={handleUploadFile}
                                 component={"span"}
                             >
@@ -89,7 +89,7 @@ const AddPicture = () => {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            sx={{ mt: 1, mb: 2 }}
                             onClick={handleSubmit}
                         >
                             {Strings.pictures.uploadPicture}

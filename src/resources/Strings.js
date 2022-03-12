@@ -34,7 +34,10 @@ const Strings = () => {
             alarm: {
                 name: "Alarms",
                 new: "New Alarm",
-                delete: "Delete Alarm"
+                delete: "Delete Alarm",
+                timePickerlabel: "Time picker",
+                addAlarm: "Add Alarm",
+                alarmName: "Alarm Name"
 
             },
             pictures: {

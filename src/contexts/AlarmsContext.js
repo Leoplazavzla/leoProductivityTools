@@ -22,6 +22,7 @@ export function AlarmProvider({children}) {
     const [loading, setLoading] = useState(true);
     const [alarmArray, setAlarmArray] = useState(null);
     const [currentTime, setCurrentTime] = useState("");
+    const [alarmSound, setAlarmSound] = useState(null);
 
 
 
@@ -103,21 +104,32 @@ export function AlarmProvider({children}) {
         setAlarmArray(newAlarmArray)
     }
 
-
-    const stopAlarmSound = (src) => {
+    const playAlarmSound = (src) => {
         const sound = new Howl({
             src
         })
+        sound.play();
+        setAlarmSound(sound)
+    }
+
+    const stopAlarmSound = () => {
+        const sound = alarmSound
         sound.stop();
     }
+
+
 
 
     const value = {
         alarmArray,
         currentTime,
+        alarmSound,
         addAlarm,
         deleteAlarm,
         searchOrCreateDoc,
+        playAlarmSound,
+        stopAlarmSound,
+
     }
 
     return (

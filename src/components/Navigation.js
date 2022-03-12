@@ -39,21 +39,20 @@ const Navigation = () => {
                 <NavBar
                     handleDrawerOpen={handleDrawerOpen}
                 />
-                <Hidden xsDown>
                     <NavigationDrawer
-                        variant={"permanent"}
-                        open={true}
+                        variant={"persistent"}
+                        open={open}
+                        closeDrawer={handleDrawerOpen}
                     />
-                </Hidden>
-                <Hidden smUp>
+                {/*<Hidden smUp>
                     <NavigationDrawer
                         variant={"temporary"}
                         open={open}
                         onClose={handleDrawerOpen}
                     />
-                </Hidden>
+                </Hidden>*/}
 
-                <div className={classes.appBar}>
+                <div >
                     <main className={classes.content}>
                         <NavigationRoutes/>
                     </main>

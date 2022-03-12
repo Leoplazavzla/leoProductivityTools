@@ -12,7 +12,7 @@ import {Howl, Howler} from "howler"
 const AddAlarm = () => {
 
     const {currentUser} = useAuth();
-    const {currentTime, addAlarm} = useAlarm();
+    const {currentTime, addAlarm, playAlarmSound} = useAlarm();
     let currTimeMilSec = undefined;
     const alarmSound = PianoAlarm;
     let alarmMilSec;
@@ -32,8 +32,6 @@ const AddAlarm = () => {
         const alarmMinute = newValue.getMinutes()
         setCurrTime({hour: time.getHours(), minute: time.getMinutes()})
         setUserAlarm({hour: alarmHour, minute: alarmMinute})
-
-
     };
 
     const alarmToMilliseconds = (alarmHour, alarmMinute, ) => {
@@ -45,16 +43,7 @@ const AddAlarm = () => {
     const currTimeToMilSec = (currHour, currMinute) => {
         const currHourToMilSec = ((currHour*60)*60)*1000
         const currMinuteToMilSec = (currMinute*60)*1000
-
         return currTimeMilSec = currHourToMilSec + currMinuteToMilSec
-
-    }
-
-    const playAlarmSound = (src) => {
-        const sound = new Howl({
-            src
-        })
-        sound.play();
     }
 
     const setAlarm = () => {
@@ -70,12 +59,7 @@ const AddAlarm = () => {
                 playAlarmSound(alarmSound)
              }, timeOut)
         }
-
     }
-
-    useEffect(() => {
-
-    })
 
     const getAlarmName = (event) => {
         setAlarmName(event.target.value)
@@ -87,16 +71,20 @@ const AddAlarm = () => {
         await addAlarm(alarmName, currentUser.email, value)
         setAlarmName("")
         Howler.volume(1.0)
-
     }
 
     return(
-            <Container >
-                <div>
+            <Container component="main" maxWidth="xs">
+                <Typography
+                    component="h1"
+                    variant="h1"
+                    sx={{mt: 2, ml: 1}}
+                >
                     {currentTime}
-                </div>
+                </Typography>
                 <Box
                     sx={{
+                        marginTop: 8,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
@@ -115,22 +103,22 @@ const AddAlarm = () => {
                         <TextField
                             margin="normal"
                             sx={{ mb: 2 }}
-                            required
                             fullWidth
                             id="name"
                             value={alarmName}
                             onChange={getAlarmName}
-                            label="Alarm Description"
-                            name="alarmDescription"
+                            label={Strings.alarm.alarmName}
+                            name="alarmName"
                             autoFocus
                         />
 
                         <TimePicker
-                            label="Time picker"
+                            label={Strings.alarm.timePickerlabel}
                             value={value}
                             onChange={handleChange}
                             renderInput={(params) => <TextField {...params} fullWidth sx={{ mb: 1 }}/>}
                         />
+
                         <Button
                             type="submit"
                             fullWidth
@@ -138,7 +126,7 @@ const AddAlarm = () => {
                             sx={{ mb: 2 }}
                             onClick={handleSubmit}
                         >
-                            Add Alarm
+                            {Strings.alarm.addAlarm}
                         </Button>
                     </Box>
                 </Box>

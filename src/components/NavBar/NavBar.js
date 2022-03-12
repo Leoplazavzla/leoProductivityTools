@@ -5,14 +5,13 @@ import {makeStyles} from "@material-ui/core/styles"
 import Strings from "../../resources/Strings"
 import {paths} from "../../resources/paths"
 import {useAuth} from "../../contexts/AuthContext"
-import {auth} from "../../firebase/firebaseConfig";
 import {NavLink} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
         menuButton: {
             marginRight: theme.spacing(2),
             [theme.breakpoints.up('sm')]:{
-                display: 'none'
+                //display: 'none'
             }
         },
         title: {
@@ -30,12 +29,12 @@ const useStyles = makeStyles(theme => ({
 
 
 const NavBar = (props) => {
-    const {currentUser, logOut} = useAuth();
+    const {currentUser} = useAuth();
     const classes = useStyles();
 
     return (
 
-        <AppBar className={classes.appBar} color={"primary"} position={"sticky"}>
+         <AppBar   color={"primary"} position={"sticky"}>
             <Toolbar>
                 <IconButton onClick={props.handleDrawerOpen} className={classes.menuButton} color="inherit" aria-label="Menu">
                     <MenuIcon/>
