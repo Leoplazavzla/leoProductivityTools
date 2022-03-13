@@ -37,8 +37,16 @@ const Strings = () => {
                 delete: "Delete Alarm",
                 timePickerlabel: "Time picker",
                 addAlarm: "Add Alarm",
-                alarmName: "Alarm Name"
-
+                alarmName: "Alarm Name",
+                description: "Create as many alarms as you need"
+            },
+            notes: {
+                name: "Notes",
+                new: "New Note",
+                addNote: "Add Note",
+                delete: "Delete Note",
+                edit: "Edit Note",
+                description: "Save your thoughts"
             },
             pictures: {
                 name: "Pictures",
@@ -46,11 +54,32 @@ const Strings = () => {
                 addPicture: "Add Picture",
                 uploadPicture: "Upload Picture",
                 selectFile: "Select Image",
-
+                description: "Upload your files and share the URL",
+                upload: "Upload Picture",
+                select: "Select Image",
+                download: "Download File",
+                copy: "Copy URL",
+                delete: "Delete Picture",
+                see: "See File"
+            },
+            pomodoro: {
+                name: "Pomodoro Clock",
+                description: "Increase your productivity"
             },
             dashboard: {
-                title: "Welcome to Leo's PM Tools",
+                title: "Leo's PM Tools",
                 paragraph1: "This is my ReactJS webApp created to hold all the tools I use in my day-to-day work. I'll be adding new features in the future :-)"
+            },
+            about: {
+                title: "About",
+                about: "About this App",
+                paragraph1: "This webApp was created using the ReactJS library, the MaterialUI framework and the BAAS FireBase from Google."
+
+            },
+            personalDetails: {
+                linkedin: " LinkedIn",
+                github: "GitHub",
+
             }
         }
     )
