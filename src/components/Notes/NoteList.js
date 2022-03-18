@@ -1,6 +1,5 @@
 import React, {useEffect} from "react"
-import {Container, Stack, TextField, Button, Grid } from "@mui/material";
-import {TableBody, TableCell, TableHead, Table, TableRow} from "@material-ui/core";
+import {Button, Card, CardActions, CardContent, Grid, Typography} from "@mui/material";
 import {useNote} from "../../contexts/NotesContext";
 import {useAuth} from "../../contexts/AuthContext"
 import Strings from "../../resources/Strings";
@@ -16,20 +15,29 @@ const NoteList = () => {
     }, [])
 
 
-
     return (
         <>
-            <Container>
-                {noteArray ?
-                    <Table>
-                        <TableBody>
-                            {noteArray.map( (note) => (
-
-                                <TableRow key={note.id}>
-                                    <TableCell>{note.name}</TableCell>
-                                    <TableCell>{note.description}</TableCell>
-                                    <TableCell>
+            {noteArray ?
+                <Grid container spacing={1}>
+                    {noteArray.map((note) => (
+                        <Grid item key={note.id} xs={12} sm={6} md={4}>
+                            <Card >
+                                <CardContent>
+                                    <Typography
+                                        gutterBottom variant="h4"
+                                        component="div"
+                                    >
+                                        {note.name}
+                                    </Typography>
+                                    <Typography
+                                        variant="body2"
+                                        color="text.secondary"
+                                    >
+                                        {note.description}
+                                    </Typography>
+                                    <CardActions>
                                         <Button
+                                            size="small"
                                             onClick={() => {
                                                 editNote(note.id, note.name, note.description)
                                                 setNoteId(note.id)
@@ -37,28 +45,23 @@ const NoteList = () => {
                                         >
                                             {Strings.notes.edit}
                                         </Button>
-                                    </TableCell>
-
-                                    <TableCell>
                                         <Button
+                                            size="small"
                                             onClick={() => deleteNotes(note.id, currentUser.email)}
                                         >
                                             {Strings.notes.delete}
-                                        </Button> </TableCell>
-                                </TableRow>
+                                        </Button>
+                                    </CardActions>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    ))}
 
-                            )
-                            )}
-                    </TableBody>
-                    </Table>
-                    :
-                    <div>No notes yet</div>
-                }
+                </Grid>
 
-
-
-
-            </Container>
+                :
+                <div>No notes yet</div>
+            }
         </>
     )
 }

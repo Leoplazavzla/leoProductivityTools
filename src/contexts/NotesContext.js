@@ -80,7 +80,7 @@ export function NotesProvider({children}) {
         fetchNotes();
 
 
-    }, [noteArray])
+    }, [])
 
 
 
