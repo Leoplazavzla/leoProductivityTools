@@ -6,10 +6,6 @@ import {NotesProvider} from "../contexts/NotesContext"
 
 const Notes = () => {
 
-    useEffect(() => {
-
-    })
-
     return(
             <Container>
                 <NotesProvider>

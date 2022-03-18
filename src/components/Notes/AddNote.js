@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import {useAuth} from "../../contexts/AuthContext"
 import {useNote} from "../../contexts/NotesContext";
-import {Container, TextField, Button, Typography, Box, Avatar} from "@mui/material";
+import {Avatar, Box, Button, Container, TextField, Typography} from "@mui/material";
 import Strings from "../../resources/Strings"
 import {NoteAlt} from "@mui/icons-material";
 
@@ -9,33 +9,59 @@ import {NoteAlt} from "@mui/icons-material";
 const AddNote = () => {
 
     const {currentUser} = useAuth();
-    const {addNote,
-        currentId,
+    const {
+        addNote,
         setNoteName,
         noteName,
         setNoteDescription,
-        noteDescription} = useNote();
-
+        noteDescription,
+        editNoteName,
+        setEditNoteName,
+        editNoteDescription,
+        setEditNoteDescription,
+        isEditing,
+        setIsEditing,
+        submitEditedNote,
+        noteId
+    } = useNote();
 
     useEffect(() => {
-        if(currentId){
 
-        }
-    }, [currentId])
+    })
 
     const getName = (event) => {
-        setNoteName(event.target.value)
+        if(isEditing){
+            setEditNoteName(event.target.value)
+        }else {
+            setNoteName(event.target.value)
+        }
     }
 
     const getNoteDescription = (event) => {
-        setNoteDescription(event.target.value)
+        if(isEditing){
+            setEditNoteDescription(event.target.value)
+        }else {
+            setNoteDescription(event.target.value)
+        }
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await addNote(noteName, currentUser.email, noteDescription)
+        await addNote(currentUser.email, noteName, noteDescription)
         setNoteName("")
         setNoteDescription("")
+        if(isEditing){
+            setIsEditing(false)
+        }
+    }
+
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+        await submitEditedNote(noteId, currentUser.email)
+        setIsEditing(false)
+        setNoteName("")
+        setNoteDescription("")
+
     }
 
     return(
@@ -65,7 +91,7 @@ const AddNote = () => {
                             required
                             fullWidth
                             id="name"
-                            value={noteName}
+                            value={isEditing ? editNoteName : noteName}
                             onChange={getName}
                             label="Note Name"
                             name="noteName"
@@ -79,7 +105,7 @@ const AddNote = () => {
                             maxRows={6}
                             fullWidth
                             id="description"
-                            value={noteDescription}
+                            value={isEditing ? editNoteDescription : noteDescription}
                             onChange={getNoteDescription}
                             label="Note Description"
                             name="noteDescription"
@@ -87,15 +113,28 @@ const AddNote = () => {
                             autoFocus
                         />
 
-                        <Button
+                        {isEditing ?
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 1, mb: 2 }}
+                                onClick={handleUpdate}
+                            >
+                                {Strings.notes.update}
+                            </Button>
+                        :
+                            <Button
                             type="submit"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 1, mb: 2 }}
                             onClick={handleSubmit}
-                        >
-                            {Strings.notes.new}
-                        </Button>
+                            >
+                        {Strings.notes.new}
+                            </Button>}
+
+
 
                     </Box>
                 </Box>

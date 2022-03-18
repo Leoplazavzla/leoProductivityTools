@@ -34,7 +34,7 @@ const Strings = () => {
             alarm: {
                 name: "Alarms",
                 new: "New Alarm",
-                delete: "Delete Alarm",
+                delete: "Stop Alarm",
                 timePickerlabel: "Time picker",
                 addAlarm: "Add Alarm",
                 alarmName: "Alarm Name",
@@ -46,6 +46,7 @@ const Strings = () => {
                 addNote: "Add Note",
                 delete: "Delete Note",
                 edit: "Edit Note",
+                update: "Update Note",
                 description: "Save your thoughts"
             },
             pictures: {
