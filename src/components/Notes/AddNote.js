@@ -25,10 +25,6 @@ const AddNote = () => {
         noteId
     } = useNote();
 
-    useEffect(() => {
-
-    })
-
     const getName = (event) => {
         if(isEditing){
             setEditNoteName(event.target.value)

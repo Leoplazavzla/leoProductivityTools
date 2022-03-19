@@ -1,6 +1,6 @@
 import React, {useContext, useState, useEffect} from "react";
 import {useAuth} from "./AuthContext"
-import { doc, getDoc, setDoc, addDoc, updateDoc, collection, getDocs, documentId} from "firebase/firestore";
+import { doc, getDoc, setDoc, addDoc, updateDoc, collection, getDocs, deleteDoc} from "firebase/firestore";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {bucket} from "../firebase/firebaseConfig";
 import db from "../firebase/firebaseConfig";
@@ -16,7 +16,7 @@ export function NotesProvider({children}) {
 
 
     const fakeData = [
-        {name: "first note", description:"This is the first note"}
+        {name: "Test Note", description:"This is a test note. Please delete it"}
     ]
 
     const [loading, setLoading] = useState(true);
@@ -30,13 +30,8 @@ export function NotesProvider({children}) {
 
 
     const deleteNotes = async (noteId, userEmail) => {
-        const docRef = collection(db, userEmail);
-        const docSnap = await getDocs(docRef);
-        const noteToDelete = docSnap.docs.filter(
-            (object) => object.id !== noteId
-        );
-        console.log(noteToDelete)
-        await updateDoc(docRef, noteToDelete);
+        const noteToDelete = doc(db, userEmail, noteId)
+        await deleteDoc(noteToDelete);
     }
 
     const editNote = async (noteId, name, description) => {
@@ -59,12 +54,24 @@ export function NotesProvider({children}) {
         const newNote = {name: name, description: description}
         const docRef = collection(db, userEmail);
         await addDoc(docRef, newNote)
+        setNoteArray([...noteArray, newNote])
     }
 
-    const searchOrCreateDoc = async (email) => {
-        const notesDocRef = await collection(db,email);
+    const searchOrCreateDoc = async (userEmail) => {
+        const notesDocRef = await collection(db, userEmail);
         const docSnap = await getDocs(notesDocRef);
-        setNoteArray(docSnap.docs.map((doc) => ({...doc.data(), id: doc.id})))
+        const newNoteArray = docSnap.docs.map((doc) => ({...doc.data(), id: doc.id}))
+        if(docSnap){
+            setNoteArray(newNoteArray)
+            return newNoteArray
+        }else{
+            const newNote = fakeData
+            console.log("i'm inside")
+            const docRef = collection(db, userEmail);
+            await setDoc(docRef, newNote)
+            setNoteArray([newNote])
+            return newNote
+        }
     }
 
     useEffect(() => {
@@ -75,9 +82,10 @@ export function NotesProvider({children}) {
             setLoading(false)
 
             return fetchedNotes
-
         }
-        fetchNotes();
+        fetchNotes().then(() => {
+
+        });
 
 
     }, [])

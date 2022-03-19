@@ -9,11 +9,6 @@ const NoteList = () => {
     const {noteArray, deleteNotes, editNote, setNoteId} = useNote();
     const {currentUser} = useAuth();
 
-    useEffect(() => {
-        //const newArray = Object.keys(noteArray)
-        console.log(noteArray)
-    }, [])
-
 
     return (
         <>
