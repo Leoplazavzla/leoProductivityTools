@@ -53,7 +53,7 @@ const Strings = () => {
                 delete: "Delete Note",
                 edit: "Edit Note",
                 update: "Update Note",
-                description: "Save your thoughts",
+                description: "Save your thoughts and many more",
                 success: "The note was added successfully",
                 deleted: "The note was deleted",
                 edited: "The note was edited"
@@ -74,6 +74,13 @@ const Strings = () => {
                 success: "File uploaded successfully",
                 edited: "File has been updated",
                 deleted: "File has been deleted"
+            },
+            errorPage: {
+                message: "What do you think you're doing? Get back to the app :-)",
+                message2: "What to create some notes?",
+                error: "Error 404! Page not found",
+                home: "Back to home"
+
             },
             pomodoro: {
                 name: "Pomodoro Clock",

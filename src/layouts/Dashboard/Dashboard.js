@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © Leospmtools '}
+            {'Copyright © Leopmtools '}
             {new Date().getFullYear()}
             {'.'}
 
@@ -217,7 +217,6 @@ const Dashboard = () => {
                                     {Strings.notes.addNote}
                                 </Link>
                             </div>
-
                         </Card>
                     </Grid>
                 </Grid>
