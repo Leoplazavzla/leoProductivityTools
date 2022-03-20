@@ -56,7 +56,8 @@ const Strings = () => {
                 description: "Save your thoughts and many more",
                 success: "The note was added successfully",
                 deleted: "The note was deleted",
-                edited: "The note was edited"
+                edited: "The note was edited",
+                copied: "Note copied to clipboard"
             },
             pictures: {
                 name: "Pictures",

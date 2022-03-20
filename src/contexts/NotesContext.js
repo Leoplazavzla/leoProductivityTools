@@ -17,6 +17,7 @@ export function NotesProvider({children}) {
     const [noteArray, setNoteArray] = useState(null);
     const [noteName, setNoteName] =  useState("");
     const [noteDescription, setNoteDescription] = useState("");
+    const [copyNoteDescription, setCopyNoteDescription] = useState(false);
     const [editNoteName, setEditNoteName] = useState("");
     const [editNoteDescription, setEditNoteDescription] = useState("");
     const [isEditing, setIsEditing] = useState(false);
@@ -43,17 +44,21 @@ export function NotesProvider({children}) {
         const docToEdit = doc(db, userEmail, noteId)
         const newData = {name: editNoteName, description: editNoteDescription, id: noteId}
         await updateDoc(docToEdit, newData )
+
+        const newNoteArray = noteArray.map((note) => (
+            note.id === noteId ? newData : note
+        ))
         NotificationToast.infoToast(Strings.notes.edited)
         setIsEditing(false)
-        setNoteArray([newData])
+        setNoteArray(newNoteArray)
     }
 
     const addNote = async (userEmail, name, description) => {
-        const newNote = {name: name, description: description}
         const colRef = await collection(db, userEmail)
+        const newNote = {name: name, description: description}
         const note = await addDoc(colRef, newNote);
-        NotificationToast.successToast(Strings.notes.success)
-        setNoteArray([
+        NotificationToast.successToast(Strings.notes.success);
+        await setNoteArray([
             ...noteArray,
             {...newNote, id: note.id}
         ])
@@ -64,6 +69,11 @@ export function NotesProvider({children}) {
         const docSnap = await getDocs(notesDocRef);
         const newNoteArray = docSnap.docs.map((doc) => ({...doc.data(), id: doc.id}))
         return newNoteArray
+    }
+
+    const copyNoteContent = () => {
+        setCopyNoteDescription(true)
+        NotificationToast.successToast(Strings.notes.copied)
     }
 
     useEffect(() => {
@@ -96,6 +106,7 @@ export function NotesProvider({children}) {
         addNote,
         editNote,
         submitEditedNote,
+        copyNoteContent,
     }
 
     return(
