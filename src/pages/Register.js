@@ -11,16 +11,14 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {NavLink} from "react-router-dom";
 
 const Register = () => {
-    const {register, currentUser, logOut} = useAuth();
+    const {register} = useAuth();
     let navigate = useNavigate();
-    console.log(currentUser)
 
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
     const [confirmationPassword, setConfirmationPassword] = useState("");
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState(false);
 
     const handleSubmit = async () => {
 
@@ -37,13 +35,8 @@ const Register = () => {
         setLoading(false)
     }
 
-    const signOut = () => {
-        logOut(auth)
-    }
-
     return (
         <BaseLayout>
-
             <Container component="main" maxWidth="xs">
                 <Box
                     sx={{
@@ -64,7 +57,9 @@ const Register = () => {
                         noValidate
                         sx={{mt: 1}}
                     >
-                        {error && <Alert severity={"error"}>{Strings.register.error}</Alert>}
+                        {error &&
+                            <Alert severity={"error"}>{Strings.register.error}</Alert>
+                        }
 
                         <TextField
                             margin="normal"
@@ -112,7 +107,7 @@ const Register = () => {
                     <Grid container justifyContent={"center"}>
                         <Grid item>
                             <NavLink to="/login" variant="body2">
-                                {"Already have an account? Login"}
+                                {Strings.register.haveAnAccount}
                             </NavLink>
                         </Grid>
                     </Grid>
@@ -124,77 +119,6 @@ const Register = () => {
 }
 
 export default Register;
-
-
-/*<Grid container direction="column" spacing={2}>
-    <Grid item>
-        <div><h1>{Strings.register.name}</h1></div>
-    </Grid>
-    {error && <Alert severity={"error"}>{Strings.register.error}</Alert>}
-    <Grid item>
-        <TextField
-            label={Strings.register.insertUserName}
-            value={registerEmail || ''}
-            onChange={
-                (e) => {
-                    setRegisterEmail(e.target.value)
-                }
-            }
-            style={{width: '60%', paddingBottom: '15px'}}
-            error={false}>
-        </TextField>
-    </Grid>
-    <Grid item>
-        <TextField
-            label={Strings.register.insertPassword}
-            type={"password"}
-            value={registerPassword || ''}
-            onChange={(e) => setRegisterPassword(e.target.value)}
-            style={{width: '60%', paddingBottom: '15px'}}
-            error={error}>
-        </TextField>
-
-    </Grid>
-    <Grid item>
-        <TextField
-            label={Strings.register.passwordConfirmation}
-            type={"password"}
-            value={confirmationPassword || ''}
-            onChange={(e) => setConfirmationPassword(e.target.value)}
-            style={{width: '60%', paddingBottom: '15px'}}
-            error={error}>
-
-        </TextField>
-
-    </Grid>
-    <Grid item>
-        <Button
-            disabled={loading}
-            onClick={handleSubmit}
-        >
-            {Strings.register.createAccount}
-        </Button>
-        <Grid>
-            Already have an account?
-            <Link to= "/login">Login</Link>
-        </Grid>
-
-    </Grid>
-</Grid>
-<br/>
-<Grid item>
-<TextField
-value={`Hello ${currentUser?.email}`}
-style={{width: '60%', paddingBottom: '15px'}}
-error={false}>
-</TextField>
-<Button
-    onClick={signOut}
->
-    {Strings.navBar.logout}
-</Button>
-
-</Grid>*/
 
 
 

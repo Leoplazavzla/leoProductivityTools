@@ -2,30 +2,29 @@ import React, {useState} from "react"
 import BaseLayout from "../BaseLayout";
 import Grid from "@material-ui/core/Grid";
 import Strings from "../resources/Strings";
-import {Button, Typography, Box, Container, TextField, Avatar, Link} from "@mui/material";
+import {Button, Typography, Box, Container, TextField, Avatar} from "@mui/material";
 import {auth} from "../firebase/firebaseConfig"
 import {useNavigate} from "react-router-dom/";
 import {useAuth} from "../contexts/AuthContext"
 import LoginIcon from '@mui/icons-material/Login';
-import Alert from '@mui/material/Alert';
 import {NavLink} from "react-router-dom";
 
 const Login = () => {
     let navigate = useNavigate();
-    const {currentUser, logIn} = useAuth();
+    const {logIn} = useAuth();
 
     const [loginEmail, setLoginEmail] = useState("")
     const [loginPassword, setLoginPassword] = useState("")
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState({})
-
     const singIn = async () => {
         try{
             setError(false)
             setLoading(true)
-            await logIn(auth, loginEmail, loginPassword).then((navigate("/dashboard")))
-        }catch {
+            await logIn(auth, loginEmail, loginPassword).then(navigate("/"))
+
+        }catch (error){
+            console.log(error)
             setError(true)
         }
     }
@@ -63,7 +62,7 @@ const Login = () => {
                                     setLoginEmail(e.target.value)
                                 }
                             }
-                            error={false}
+                            error={error}
                         />
 
                         <TextField
@@ -72,7 +71,7 @@ const Login = () => {
                             type={"password"}
                             value={loginPassword || ''}
                             onChange={(e) => setLoginPassword(e.target.value)}
-                            error={false}
+                            error={error}
                         />
                         <Button
                             type="submit"
@@ -88,7 +87,7 @@ const Login = () => {
 
                             <Grid item>
                                 <NavLink to="/register" variant="body2">
-                                    {"Don't have an account? Sign Up"}
+                                    {Strings.login.dontHaveAccount}
                                 </NavLink>
                             </Grid>
                         </Grid>

@@ -77,13 +77,10 @@ export function PicturesProvider({children}) {
             await setPictureArray(fetchedPictures)
             setLoading(false)
             return fetchedPictures
-
         }
         fetchPictures();
 
-
     }, [])
-
 
 
     const value = {
@@ -92,8 +89,6 @@ export function PicturesProvider({children}) {
         addPicture,
         fileURL,
         uploadPicture
-
-
     }
 
     return(

@@ -9,15 +9,40 @@ import {
     Card,
     CardMedia,
     CardContent,
-    CardActions
 } from "@mui/material";
 import {Link} from "react-router-dom"
 import Strings from "../../resources/Strings";
 import {paths} from "../../resources/paths"
-import alarm from "../../images/alarm.jpg"
-import picture from "../../images/picture.jpg"
-import pomodoro from "../../images/pomodoro.jpg"
+import alarm from "../../images/digital-alarm.png"
+import picture from "../../images/photo-camera.png"
+import notes from "../../images/notes.png"
 import LinkedIn from "@material-ui/icons/LinkedIn"
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles(theme => ({
+    dashboardButton: {
+        display: "block",
+        padding: "8px",
+        width: "100%",
+        textDecoration: "none",
+        backgroundColor: "purple",
+        color: "white",
+        textAlign: "center"
+
+    },
+    cards: {
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: "center",
+        justifyItems: "center"
+    },
+    cardActions: {
+        maxWidth: "100%",
+        width: "100%"
+    }
+
+}));
 
 function Copyright(props) {
     return (
@@ -32,13 +57,14 @@ function Copyright(props) {
 
 
 const Dashboard = () => {
+    const classes = useStyles();
 
     return(
         <>
             <Box
                 sx={{
                     bgcolor: 'background.paper',
-                    pt: 8,
+                    pt: 4,
                     pb: 6,
                 }}
             >
@@ -90,44 +116,50 @@ const Dashboard = () => {
             </Box>
             <Container>
                 <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6} md={4}>
-                        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                        <CardMedia
-                        component="img"
-                        image={alarm}
-                        alt="random"
+                    <Grid item xs={12} sm={6} md={4}>
+                        <Card className={classes.cards}>
+
+                            <CardMedia
+                                sx={{
+                                    marginTop: 2,
+                                    width: 151
+                                }}
+                                component="img"
+                                image={alarm}
+                                alt="random"
                         />
 
                         <CardContent sx={{ flexGrow: 1 }}>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            {Strings.alarm.name}
-                        </Typography>
-                        <Typography>
-                            {Strings.alarm.description}
-                        </Typography>
+                            <Typography gutterBottom variant="h5" component="h2">
+                                {Strings.alarm.name}
+                            </Typography>
+                            <Typography>
+                                {Strings.alarm.description}
+                            </Typography>
                         </CardContent>
-                        <CardActions>
-                        <Button
-                            rel="noreferrer"
-                            component={Link}
-                            variant={"outlined"}
-                            color={"primary"}
-                            to={paths.alarm.basePath}
-                        >
-                            {Strings.alarm.new}
-                        </Button>
-                        </CardActions>
+                            <div className={classes.cardActions}>
+                                <Link
+                                    className={classes.dashboardButton}
+                                    rel="noreferrer"
+                                    color={"primary"}
+                                    to={paths.alarm.basePath}
+                                >
+                                    {Strings.alarm.addAlarm}
+                                </Link>
+                            </div>
+
 
                         </Card>
+
                         </Grid>
 
                     <Grid item xs={12} sm={6} md={4}>
-                        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                        <Card className={classes.cards}>
                             <CardMedia
                                 component="img"
                                 sx={{
-                                    // 16:9
-                                    //pt: '56.25%',
+                                    marginTop: 2,
+                                    width: 151
                                 }}
                                 image={picture}
                                 alt="random"
@@ -141,52 +173,50 @@ const Dashboard = () => {
                                     {Strings.pictures.description}
                                 </Typography>
                             </CardContent>
-                            <CardActions>
-                                <Button
+                            <div className={classes.cardActions}>
+                                <Link
+                                    className={classes.dashboardButton}
                                     rel="noreferrer"
-                                    component={Link}
-                                    variant={"outlined"}
                                     color={"primary"}
                                     to={paths.pictures.basePath}
                                 >
                                     {Strings.pictures.addPicture}
-                                </Button>
-                            </CardActions>
+                                </Link>
+                            </div>
 
                         </Card>
                     </Grid>
 
                     <Grid item xs={12} sm={6} md={4}>
-                        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                        <Card className={classes.cards}>
                             <CardMedia
                                 component="img"
                                 sx={{
-                                    // 16:9
-                                    //pt: '56.25%',
+                                    marginTop: 2,
+                                    width: 151
                                 }}
-                                image={pomodoro}
+                                image={notes}
                                 alt="random"
                             />
 
                             <CardContent sx={{ flexGrow: 1 }}>
                                 <Typography gutterBottom variant="h5" component="h2">
-                                    {Strings.pomodoro.name}
+                                    {Strings.notes.name}
                                 </Typography>
                                 <Typography>
-                                    {Strings.pomodoro.description}
+                                    {Strings.notes.description}
                                 </Typography>
                             </CardContent>
-                            <CardActions>
-                                <Button
+                            <div className={classes.cardActions}>
+                                <Link
+                                    className={classes.dashboardButton}
                                     rel="noreferrer"
-                                    component={Link}
-                                    variant={"outlined"}
                                     color={"primary"}
-                                    to={paths.pomodoro.basePath}
+                                    to={paths.notes.basePath}
                                 >
-                                    {Strings.pomodoro.name}
-                                </Button>
-                            </CardActions>
+                                    {Strings.notes.addNote}
+                                </Link>
+                            </div>
 
                         </Card>
                     </Grid>

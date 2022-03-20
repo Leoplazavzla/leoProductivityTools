@@ -1,6 +1,6 @@
 import React from "react"
-import {Container, Stack, TextField, Button, Grid } from "@mui/material";
-import {TableBody, TableCell, TableHead, Table, TableRow} from "@material-ui/core";
+import {Container, Button} from "@mui/material";
+import {TableBody, TableCell, Table, TableRow} from "@material-ui/core";
 import {usePicture} from "../contexts/PicturesContext";
 import {useAuth} from "../contexts/AuthContext"
 import Strings from "../resources/Strings";
@@ -28,7 +28,8 @@ const PictureList = () => {
                                                 onClick={() => deletePictures(pictureObject.id, currentUser.email)}
                                             >
                                                 {Strings.pictures.delete}
-                                            </Button> </TableCell>
+                                            </Button>
+                                        </TableCell>
                                     </TableRow>
                                 )
                             })}
@@ -37,9 +38,6 @@ const PictureList = () => {
                     </Table>
                     :
                     <div>No pictures yet</div>}
-
-
-
 
             </Container>
         </>

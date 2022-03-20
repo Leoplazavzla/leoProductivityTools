@@ -21,7 +21,8 @@ const Strings = () => {
                 passwordConfirmation: "Password confirmation",
                 password: "Password",
                 createAccount: "Create Account",
-                error: "The passwords don't match"
+                error: "The passwords don't match",
+                haveAnAccount: "Already have an account? Login"
             },
             login: {
                 name: "Login",
@@ -29,15 +30,17 @@ const Strings = () => {
                 username: "Username",
                 insertPassword: "Insert your password",
                 password: "Password",
-                signIn: "Sign In"
+                signIn: "Sign In",
+                dontHaveAccount: "Don't have an account? Sign Up",
             },
             alarm: {
                 name: "Alarms",
                 new: "New Alarm",
                 delete: "Stop Alarm",
-                timePickerlabel: "Time picker",
+                timePickerLabel: "Time picker",
                 addAlarm: "Add Alarm",
                 alarmName: "Alarm Name",
+                update: "Update alarm",
                 description: "Create as many alarms as you need"
             },
             notes: {

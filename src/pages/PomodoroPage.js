@@ -1,10 +1,11 @@
 import React from "react"
+import BaseLayout from "../BaseLayout";
 
 const Pomodoro = () => {
     return(
-        <div>
+        <BaseLayout>
             This is Pomodoro page
-        </div>
+        </BaseLayout>
     )
 }
 export default Pomodoro

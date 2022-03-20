@@ -2,7 +2,6 @@ import React from "react";
 import {Route, Routes} from "react-router";
 import PrivateRoute from "./components/PrivateRoute"
 
-
 //Dashboard
 import Dashboard from "./layouts/Dashboard/Dashboard"
 //Pages
@@ -24,18 +23,18 @@ const NavigationRoutes = () => {
     return (
         <Routes>
             <Route exact path={paths.home} element={<PrivateRoute> <Dashboard/> </PrivateRoute>}/>
-            <Route path={paths.dashboard} element={<Dashboard/>}/>
-            <Route path={paths.alarm.basePath} element={<AlarmPage/>}/>
-            <Route path={paths.notes.basePath} element={<NotesPage/>}/>
-            <Route path={paths.pictures.basePath} element={<Pictures/>}/>
-            <Route path={paths.pomodoro.basePath} element={<Pomodoro/>}/>
-            <Route path={paths.messages.basePath} element={<Messages/>}/>
-            <Route path={paths.about} element={<AboutPage/>}/>
-            <Route path={paths.posts.new} element={<NewPost/>}/>
+            {/*<Route path={paths.dashboard} element={<PrivateRoute> <Dashboard/> </PrivateRoute>}/>*/}
+            <Route path={paths.alarm.basePath} element={<PrivateRoute> <AlarmPage/></PrivateRoute>}/>
+            <Route path={paths.notes.basePath} element={<PrivateRoute> <NotesPage/> </PrivateRoute>}/>
+            <Route path={paths.pictures.basePath} element={<PrivateRoute> <Pictures/> </PrivateRoute>}/>
+            <Route path={paths.pomodoro.basePath} element={<PrivateRoute> <Pomodoro/> </PrivateRoute>}/>
+            <Route path={paths.messages.basePath} element={<PrivateRoute> <Messages/> </PrivateRoute>}/>
+            <Route path={paths.about} element={<PrivateRoute> <AboutPage/> </PrivateRoute>}/>
+            <Route path={paths.posts.new} element={<PrivateRoute> <NewPost/> </PrivateRoute>}/>
             <Route path={paths.login} element={<Login/>}/>
             <Route path={paths.register} element={<Register/>}/>
             <Route path={paths.logout} element={<Logout/>}/>
-            <Route path={paths.motorcycles} element={<Motorcycles/>}/>
+            <Route path={paths.motorcycles} element={<PrivateRoute> <Motorcycles/> </PrivateRoute>}/>
             <Route path={"*"} element={<ErrorPage/>}/>
 
         </Routes>

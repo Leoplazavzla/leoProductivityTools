@@ -1,8 +1,9 @@
 import React, {useContext, useEffect, useState} from "react";
-import {doc, getDoc, setDoc, updateDoc} from "firebase/firestore";
+import {deleteDoc, doc, getDoc, setDoc, updateDoc} from "firebase/firestore";
 import db from "../firebase/firebaseConfig";
 import {useAuth} from "./AuthContext"
 import {Howl, Howler} from "howler";
+import {addDoc, collection, getDocs} from "firebase/firestore/dist/index.mjs";
 
 const AlarmContext = React.createContext(1);
 
@@ -13,32 +14,58 @@ export function useAlarm() {
 export function AlarmProvider({children}) {
     const {currentUser} = useAuth();
 
-    const fakeData = [
+    /*const fakeData = [
         {id: 1, name: "first alarm", date: new Date()},
         {id: 2, name: "Second Alarm", date: new Date()},
         {id: 3, name: "Third Alarm", date: new Date()}
-    ];
+    ];*/
 
     const [loading, setLoading] = useState(true);
     const [alarmArray, setAlarmArray] = useState(null);
+    const [alarmName, setAlarmName] = useState("");
     const [currentTime, setCurrentTime] = useState("");
     const [alarmSound, setAlarmSound] = useState(null);
+    const [alarmId, setAlarmId] = useState(false);
+    const [alarmTime, setAlarmTime] = useState("")
 
 
 
-    const searchOrCreateDoc = async (email) => {
-        const docRef = await doc(db, "alarms", email);
-        const docSnap = await getDoc(docRef);
 
-        if (docSnap.exists()) {
-            const docData = docSnap.data();
-            return docData.alarm;
-        } else {
-            await setDoc(docRef, {alarm: [...fakeData]})
-            const docSnap = await getDoc(docRef);
-            const docData = docSnap.data()
-            return docData.alarm;
+    const readAlarmDocs = async (userEmail) => {
+        const alarmsDocRef = await collection(db, `${userEmail}.alarms`);
+        const docSnap = await getDocs(alarmsDocRef);
+        const newAlarmArray = docSnap.docs.map((doc) => ({...doc.data(), id: doc.id}))
+        return newAlarmArray
+    }
+
+    useEffect(() => {
+
+        const fetchAlarms = async() => {
+            const fetchedAlarms = await readAlarmDocs(currentUser.email)
+            await setAlarmArray(fetchedAlarms)
+            setLoading(false)
+            return fetchedAlarms
         }
+        fetchAlarms().then(() => {});
+    }, [])
+
+    const addAlarm = async (userEmail, name, time) => {
+        const newAlarm = {name: name, time: time}
+        const alarmsDocRef = await collection(db, `${userEmail}.alarms`);
+        const alarm = await addDoc(alarmsDocRef, newAlarm);
+        setAlarmArray([
+            ...alarmArray,
+            {...newAlarm, id: alarm.id}
+        ])
+    }
+
+    const deleteAlarm = async (alarmId, userEmail) => {
+        const alarmToDelete = doc(db, `${userEmail}.alarms`, alarmId)
+        await deleteDoc(alarmToDelete);
+
+        const filteredAlarmArray = alarmArray.filter((alarm)=>
+            alarm.id !== alarmId)
+        setAlarmArray(filteredAlarmArray)
     }
 
     const formatTime = (value) => {
@@ -49,19 +76,9 @@ export function AlarmProvider({children}) {
         }
     }
 
-    useEffect(() => {
+    const userAlarm = () => {
 
-        const fetchAlarms = async () => {
-            const fetchedAlarms = await searchOrCreateDoc(currentUser.email);
-            await setAlarmArray(fetchedAlarms)
-            setLoading(false)
-            return fetchedAlarms
-
-        }
-        fetchAlarms().then(() => {
-
-        })
-    }, [])
+    }
 
     const tick = () => {
         const date = new Date();
@@ -69,10 +86,7 @@ export function AlarmProvider({children}) {
         const minute = date.getMinutes();
         const seconds = date.getSeconds();
         const actualTime = formatTime(hour) + hour + ':' + formatTime(minute) + minute + ':' + formatTime(seconds) + seconds
-
-
         setCurrentTime(actualTime)
-
     }
 
     useEffect(() => {
@@ -83,26 +97,7 @@ export function AlarmProvider({children}) {
         return function cleanup() {
             clearInterval(timerId)
         }
-
         }, [])
-
-
-    const addAlarm = async (name, userEmail, date) => {
-        const newAlarmArray = [...alarmArray, {id: +new Date(), name: name, date: date}]
-
-        const docRef = doc(db, "alarms", userEmail);
-        await updateDoc(docRef, {alarm: [...newAlarmArray]})
-        setAlarmArray(newAlarmArray)
-    }
-
-    const deleteAlarm = async (alarmId, userEmail) => {
-        const newAlarmArray = alarmArray.filter(
-            (object) => object.id !== alarmId
-        );
-        const docRef = doc(db, "alarms", userEmail);
-        await updateDoc(docRef, {alarm: [...newAlarmArray]});
-        setAlarmArray(newAlarmArray)
-    }
 
     const playAlarmSound = (src) => {
         const sound = new Howl({
@@ -117,16 +112,20 @@ export function AlarmProvider({children}) {
         sound.stop();
     }
 
-
-
-
     const value = {
         alarmArray,
+        alarmName,
+        setAlarmName,
         currentTime,
         alarmSound,
+        setAlarmSound,
+        alarmTime,
+        setAlarmTime,
+        alarmId,
+        setAlarmId,
         addAlarm,
         deleteAlarm,
-        searchOrCreateDoc,
+        //searchOrCreateDoc,
         playAlarmSound,
         stopAlarmSound,
 
@@ -138,3 +137,50 @@ export function AlarmProvider({children}) {
         </AlarmContext.Provider>
     )
 }
+
+
+/*const searchOrCreateDoc = async (email) => {
+        const docRef = await doc(db, "alarms", email);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const docData = docSnap.data();
+            return docData;
+        } else {
+            await setDoc(docRef, {...fakeData})
+            const docSnap = await getDoc(docRef);
+            const docData = docSnap.data()
+            return docData;
+        }
+    }*/
+
+/*useEffect(() => {
+
+    const fetchAlarms = async () => {
+        const fetchedAlarms = await searchOrCreateDoc(currentUser.email);
+        await setAlarmArray(fetchedAlarms)
+        setLoading(false)
+        return fetchedAlarms
+
+    }
+    fetchAlarms().then(() => {
+
+    })
+}, [])*/
+
+/*const addAlarm = async (name, userEmail, date) => {
+    const newAlarmArray = [...alarmArray, {id: +new Date(), name: name, date: date}]
+
+    const docRef = doc(db, "alarms", userEmail);
+    await updateDoc(docRef, {...newAlarmArray})
+    setAlarmArray(newAlarmArray)
+}
+const deleteAlarm = async (alarmId, userEmail) => {
+    const newAlarmArray = alarmArray.filter(
+        (object) => object.id !== alarmId
+    );
+    const docRef = doc(db, "alarms", userEmail);
+    await updateDoc(docRef, {alarm: [...newAlarmArray]});
+    setAlarmArray(newAlarmArray)
+}
+*/

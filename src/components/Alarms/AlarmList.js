@@ -1,16 +1,23 @@
 import React, {useState} from "react"
-import {Container, Stack, TextField, Button, Grid} from "@mui/material";
+import {Container, Stack, TextField, Button, Grid, IconButton} from "@mui/material";
 import {TableBody, TableCell, TableHead, Table, TableRow} from "@material-ui/core";
 import {useAlarm} from "../../contexts/AlarmsContext";
 import {useAuth} from "../../contexts/AuthContext"
-import Strings from "../../resources/Strings";
+import StopIcon from '@mui/icons-material/Stop';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 const AlarmList = () => {
     const {currentUser} = useAuth();
-    const {alarmArray, deleteAlarm, stopAlarmSound, alarmSound} = useAlarm();
-
-
+    const {
+        alarmArray,
+        deleteAlarm,
+        stopAlarmSound,
+        alarmSound,
+        setAlarmSound,
+        alarmTime,
+    } = useAlarm();
 
     return(
         <>
@@ -22,18 +29,35 @@ const AlarmList = () => {
                                 return (
                                     <TableRow key={alarmObject.id}>
                                         <TableCell>{alarmObject.name}</TableCell>
+                                        <TableCell>{alarmTime}</TableCell>
                                         <TableCell>
-                                            <Button
+
+                                            <IconButton
+                                                color={"info"}
+                                                onClick={(e) => {
+                                                    e.preventDefault()
+                                                    if(alarmSound){
+                                                        stopAlarmSound(alarmSound)
+                                                        setAlarmSound(null)
+                                                    }
+                                                }}
+                                            >
+                                                <StopIcon/>
+                                            </IconButton>
+                                            <IconButton
+                                                color={"error"}
                                                 onClick={(e) => {
                                                     e.preventDefault()
                                                     deleteAlarm(alarmObject.id, currentUser.email)
                                                     if(alarmSound){
                                                         stopAlarmSound(alarmSound)
+                                                        setAlarmSound(null)
                                                     }
                                                 }}
                                             >
-                                                {Strings.alarm.delete}
-                                            </Button> </TableCell>
+                                                <DeleteIcon/>
+                                            </IconButton>
+                                        </TableCell>
                                     </TableRow>
                                 )
                             })}
@@ -41,7 +65,6 @@ const AlarmList = () => {
                     </Table>
                 :
                 <div>No alarms yet to show</div>}
-
 
             </Container>
         </>

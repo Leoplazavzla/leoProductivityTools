@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {useAuth} from "../../contexts/AuthContext"
 import {useNote} from "../../contexts/NotesContext";
 import {Avatar, Box, Button, Container, TextField, Typography} from "@mui/material";
@@ -57,7 +57,6 @@ const AddNote = () => {
         setIsEditing(false)
         setNoteName("")
         setNoteDescription("")
-
     }
 
     return(
@@ -65,7 +64,7 @@ const AddNote = () => {
             <Container component="main" maxWidth="xs">
                 <Box
                     sx={{
-                        marginTop: 8,
+                        marginTop: 4,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
@@ -129,8 +128,6 @@ const AddNote = () => {
                             >
                         {Strings.notes.new}
                             </Button>}
-
-
 
                     </Box>
                 </Box>

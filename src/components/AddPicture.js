@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useAuth} from "../contexts/AuthContext"
 import {usePicture} from "../contexts/PicturesContext";
-import {Container, TextField, Button, Grid, Typography, Box, Avatar} from "@mui/material";
+import {Container, TextField, Button, Typography, Box, Avatar} from "@mui/material";
 import Strings from "../resources/Strings"
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
@@ -35,7 +35,7 @@ const AddPicture = () => {
             <Container component="main" maxWidth="xs">
                 <Box
                     sx={{
-                        marginTop: 8,
+                        marginTop: 3,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',

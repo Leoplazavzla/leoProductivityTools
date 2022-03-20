@@ -1,19 +1,19 @@
-import React, {useEffect} from "react"
+import React from "react"
 import {Container} from "@material-ui/core"
 import AddNote from "../components/Notes/AddNote"
 import NoteList from "../components/Notes/NoteList"
 import {NotesProvider} from "../contexts/NotesContext"
+import BaseLayout from "../BaseLayout";
 
 const Notes = () => {
 
     return(
-            <Container>
+            <BaseLayout>
                 <NotesProvider>
                     <AddNote/>
                     <NoteList/>
-                    {/*{pictureArray ? : <div>Could not find any pictures</div>}*/}
                 </NotesProvider>
-            </Container>
+            </BaseLayout>
     )
 }
 export default Notes;

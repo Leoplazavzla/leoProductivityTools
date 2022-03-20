@@ -3,7 +3,6 @@ import Box from '@material-ui/core/Box';
 import {Divider, List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
 import ListItemButton from '@material-ui/core/ListItem';
 import {Dashboard as DashboardIcon} from "@material-ui/icons"
-import {AccessTime} from "@material-ui/icons";
 import Image from "@material-ui/icons/Image"
 import Strings from "../../resources/Strings";
 import {paths} from "../../resources/paths"
@@ -26,7 +25,7 @@ export default function NavBarList() {
             {currentUser ?
                 <nav aria-label="main mailbox folders">
                     <List>
-                        <ListItem button disablepadding={"false"} component={Link} to={paths.dashboard}>
+                        <ListItem button disablepadding={"false"} component={Link} to={paths.home}>
                             <ListItemIcon>
                                 <DashboardIcon/>
                             </ListItemIcon>
@@ -81,7 +80,7 @@ export default function NavBarList() {
                     :
                     <List>
                         <ListItem disablepadding={"false"} button>
-                            <ListItem component="Link" to={paths.register}>
+                            <ListItem component={Link} to={paths.register}>
                                 <ListItemText primary={Strings.register.name}/>
                             </ListItem>
                         </ListItem>

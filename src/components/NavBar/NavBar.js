@@ -1,17 +1,17 @@
 import React from "react";
 import {Menu as MenuIcon} from "@material-ui/icons"
-import {AppBar, Button, IconButton, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, IconButton, Toolbar, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles"
 import Strings from "../../resources/Strings"
 import {paths} from "../../resources/paths"
 import {useAuth} from "../../contexts/AuthContext"
-import {NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
+import {Stack} from "@mui/material";
 
 const useStyles = makeStyles(theme => ({
         menuButton: {
             marginRight: theme.spacing(2),
             [theme.breakpoints.up('sm')]:{
-                //display: 'none'
             }
         },
         title: {
@@ -43,12 +43,17 @@ const NavBar = (props) => {
                     variant={"h6"}
                     className={classes.title}
                 >
-                    <Button style={{color: 'white', textDecoration: 'none'}} href={paths.home}>
+                    <Link style={{color: 'white', textDecoration: 'none'}} to={paths.home}>
                         {Strings.app.name}
-                    </Button>
+                    </Link>
                 </Typography>
-                {currentUser ? (<div>{`Hello ${currentUser.email}`}</div>) : (<><NavLink to={paths.login} variant={"text"} color={"inherit"}>{Strings.navBar.login}</NavLink>
-                    <NavLink to={paths.register} variant={"text"} color={"inherit"}>{Strings.navBar.register}</NavLink></>)
+                {currentUser ?
+                    (<div>{`Hello ${currentUser.email}`}</div>)
+                    :
+                    (<Stack direction={"row"}>
+                        <Link to={paths.login} variant={"text"} style={{color: 'white', textDecoration: 'none', marginRight: "8px"}}>{Strings.navBar.login}</Link>
+                        <Link to={paths.register} variant={"text"} style={{color: 'white', textDecoration: 'none'}}>{Strings.navBar.register}</Link>
+                    </Stack>)
                 }
 
 

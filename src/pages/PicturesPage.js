@@ -3,6 +3,7 @@ import {Container} from "@material-ui/core"
 import AddPicture from "../components/AddPicture"
 import PictureList from "../components/PictureList"
 import {PicturesProvider} from "../contexts/PicturesContext"
+import BaseLayout from "../BaseLayout";
 
 const Pictures = () => {
 
@@ -11,13 +12,12 @@ const Pictures = () => {
     })
 
     return(
-            <Container>
+            <BaseLayout>
                 <PicturesProvider>
                     <AddPicture/>
                     <PictureList/>
-                    {/*{pictureArray ? : <div>Could not find any pictures</div>}*/}
                 </PicturesProvider>
-            </Container>
+            </BaseLayout>
     )
 }
 export default Pictures;
