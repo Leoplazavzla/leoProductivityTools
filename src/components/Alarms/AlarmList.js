@@ -1,12 +1,10 @@
-import React, {useState} from "react"
-import {Container, Stack, TextField, Button, Grid, IconButton} from "@mui/material";
-import {TableBody, TableCell, TableHead, Table, TableRow} from "@material-ui/core";
+import React from "react"
+import {Container, IconButton} from "@mui/material";
+import {TableBody, TableCell, Table, TableRow} from "@material-ui/core";
 import {useAlarm} from "../../contexts/AlarmsContext";
 import {useAuth} from "../../contexts/AuthContext"
 import StopIcon from '@mui/icons-material/Stop';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-
 
 const AlarmList = () => {
     const {currentUser} = useAuth();
@@ -31,7 +29,6 @@ const AlarmList = () => {
                                         <TableCell>{alarmObject.name}</TableCell>
                                         <TableCell>{alarmTime}</TableCell>
                                         <TableCell>
-
                                             <IconButton
                                                 color={"info"}
                                                 onClick={(e) => {
@@ -65,7 +62,6 @@ const AlarmList = () => {
                     </Table>
                 :
                 <div>No alarms yet to show</div>}
-
             </Container>
         </>
     )
