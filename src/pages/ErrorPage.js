@@ -3,7 +3,6 @@ import {Box, Button, Container, Stack, Typography} from "@mui/material";
 import Strings from "../resources/Strings";
 import {Link} from "react-router-dom";
 import {paths} from "../resources/paths";
-import LinkedIn from "@material-ui/icons/LinkedIn";
 
 function Copyright(props) {
     return (

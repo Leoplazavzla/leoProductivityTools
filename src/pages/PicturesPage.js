@@ -1,5 +1,4 @@
 import React, {useEffect} from "react"
-import {Container} from "@material-ui/core"
 import AddPicture from "../components/AddPicture"
 import PictureList from "../components/PictureList"
 import {PicturesProvider} from "../contexts/PicturesContext"

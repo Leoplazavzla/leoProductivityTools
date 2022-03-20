@@ -125,7 +125,8 @@ const AddAlarm = () => {
 
                             <TimePicker
                                 label={Strings.alarm.timePickerLabel}
-                                onChange={handleChange}
+                                onChange={(e) => handleChange(e)}
+                                value={value}
                                 renderInput={(params) => <TextField {...params} fullWidth sx={{mb: 1}}/>}
                             />
 

@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import NavBar from "./NavBar/NavBar";
 import {makeStyles} from "@material-ui/core/styles";
-import {Hidden} from "@material-ui/core";
 import NavigationDrawer from "./NavigationDrawer";
 import NavigationRoutes from "../NavigationRoutes";
 import {BrowserRouter} from "react-router-dom";
@@ -32,7 +31,6 @@ const Navigation = () => {
         setOpen(!open)
     }
 
-
     return (
         <BrowserRouter>
             <div>
@@ -44,23 +42,12 @@ const Navigation = () => {
                         open={open}
                         closeDrawer={handleDrawerOpen}
                     />
-                {/*<Hidden smUp>
-                    <NavigationDrawer
-                        variant={"temporary"}
-                        open={open}
-                        onClose={handleDrawerOpen}
-                    />
-                </Hidden>*/}
 
                 <div >
                     <main className={classes.content}>
                         <NavigationRoutes/>
                     </main>
-
-
                 </div>
-
-
             </div>
         </BrowserRouter>
     )

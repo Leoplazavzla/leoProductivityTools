@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import BaseLayout from "../BaseLayout";
 import Grid from "@material-ui/core/Grid"
 import Strings from "../resources/Strings";
@@ -11,26 +11,48 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {NavLink} from "react-router-dom";
 
 const Register = () => {
-    const {register} = useAuth();
+    const {register, currentUser} = useAuth();
     let navigate = useNavigate();
+
+    useEffect(() => {
+        if(currentUser){
+            navigate("/")
+        }
+    }, [])
+
+
 
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
     const [confirmationPassword, setConfirmationPassword] = useState("");
     const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
 
         if (registerPassword !== confirmationPassword) {
-            return setError(true)
+            setErrorMessage(Strings.register.passDontMatch)
+        }
+        if(registerPassword.length < 6 && confirmationPassword < 6){
+            setErrorMessage(Strings.register.passLowerThanSix)
+        }
+        if(regEx.test(registerEmail) || registerEmail === ""){
+            setErrorMessage(Strings.register.invalidEmail)
+        }else if(regEx.test(registerEmail) || registerEmail !== ""){
+            setErrorMessage(Strings.register.invalidEmail)
         }
         try {
-            setError(false)
+            setErrorMessage(null)
             setLoading(true)
-            await register(auth, registerEmail, registerPassword).then(navigate("/dashboard"))
-        } catch {
-            setError(true)
+            await register(auth, registerEmail, registerPassword)
+            if (errorMessage === null){
+                navigate("/")
+            }
+        } catch (err){
+            setErrorMessage("Please check your details")
         }
         setLoading(false)
     }
@@ -57,22 +79,17 @@ const Register = () => {
                         noValidate
                         sx={{mt: 1}}
                     >
-                        {error &&
-                            <Alert severity={"error"}>{Strings.register.error}</Alert>
-                        }
+                        {errorMessage ? (<Alert severity={"error"}>{errorMessage}</Alert>) : null}
 
                         <TextField
                             margin="normal"
+                            type={"email"}
                             required
                             fullWidth
                             label={Strings.register.insertUserName}
                             value={registerEmail || ''}
-                            onChange={
-                                (e) => {
-                                    setRegisterEmail(e.target.value)
-                                }
-                            }
-                            error={false}
+                            onChange={(e) => setRegisterEmail(e.target.value)}
+                            error={Boolean(errorMessage)}
                         />
                         <TextField
                             margin="normal"
@@ -82,7 +99,7 @@ const Register = () => {
                             type={"password"}
                             value={registerPassword || ''}
                             onChange={(e) => setRegisterPassword(e.target.value)}
-                            error={error}
+                            error={Boolean(errorMessage)}
                         />
                         <TextField
                             margin="normal"
@@ -92,7 +109,7 @@ const Register = () => {
                             type={"password"}
                             value={confirmationPassword || ''}
                             onChange={(e) => setConfirmationPassword(e.target.value)}
-                            error={error}
+                            error={Boolean(errorMessage)}
                         />
                         <Button
                             type="submit"

@@ -21,8 +21,11 @@ const Strings = () => {
                 passwordConfirmation: "Password confirmation",
                 password: "Password",
                 createAccount: "Create Account",
-                error: "The passwords don't match",
-                haveAnAccount: "Already have an account? Login"
+                passDontMatch: "The passwords don't match",
+                passLowerThanSix: "The password should have at least 6 characters",
+                invalidEmail: "Email is invalid",
+                accountInvalid: "The account is invalid",
+                haveAnAccount: "Already have an account? Login",
             },
             login: {
                 name: "Login",
@@ -36,7 +39,7 @@ const Strings = () => {
             alarm: {
                 name: "Alarms",
                 new: "New Alarm",
-                delete: "Stop Alarm",
+                delete: "Alarm Deleted",
                 timePickerLabel: "Time picker",
                 addAlarm: "Add Alarm",
                 alarmName: "Alarm Name",
@@ -44,7 +47,7 @@ const Strings = () => {
                 description: "Create as many alarms as you need",
                 success: "The alarm was added successfully",
                 deleted: "The alarm was deleted",
-                stop: "The alarm hast stopped"
+                stop: "The alarm hast stopped",
             },
             notes: {
                 name: "Notes",

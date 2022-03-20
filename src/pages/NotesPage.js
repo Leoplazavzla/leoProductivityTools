@@ -1,5 +1,4 @@
 import React from "react"
-import {Container} from "@material-ui/core"
 import AddNote from "../components/Notes/AddNote"
 import NoteList from "../components/Notes/NoteList"
 import {NotesProvider} from "../contexts/NotesContext"

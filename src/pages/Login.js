@@ -8,6 +8,7 @@ import {useNavigate} from "react-router-dom/";
 import {useAuth} from "../contexts/AuthContext"
 import LoginIcon from '@mui/icons-material/Login';
 import {NavLink} from "react-router-dom";
+import Alert from "@mui/material/Alert";
 
 const Login = () => {
     let navigate = useNavigate();
@@ -15,18 +16,30 @@ const Login = () => {
 
     const [loginEmail, setLoginEmail] = useState("")
     const [loginPassword, setLoginPassword] = useState("")
-    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(null);
     const [loading, setLoading] = useState(false);
-    const singIn = async () => {
+
+    const singIn = async (e) => {
+        e.preventDefault()
+        const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+
+        if(regEx.test(loginEmail) || loginEmail === ""){
+            setErrorMessage(Strings.register.invalidEmail)
+        }else if(regEx.test(loginEmail) || loginEmail !== ""){
+            setErrorMessage(Strings.register.invalidEmail)
+        }
+
         try{
-            setError(false)
+            setErrorMessage(null)
             setLoading(true)
-            await logIn(auth, loginEmail, loginPassword).then(navigate("/"))
+            await logIn(auth, loginEmail, loginPassword)
+            navigate("/")
 
         }catch (error){
             console.log(error)
-            setError(true)
+            setErrorMessage(Strings.register.accountInvalid)
         }
+        setLoading(false)
     }
 
     return(
@@ -51,6 +64,7 @@ const Login = () => {
                         noValidate
                         sx={{ mt: 1 }}
                     >
+                        {errorMessage ? (<Alert severity={"error"}>{errorMessage}</Alert>) : null}
                         <TextField
                             margin="normal"
                             required
@@ -62,7 +76,7 @@ const Login = () => {
                                     setLoginEmail(e.target.value)
                                 }
                             }
-                            error={error}
+                            error={Boolean(errorMessage)}
                         />
 
                         <TextField
@@ -71,7 +85,7 @@ const Login = () => {
                             type={"password"}
                             value={loginPassword || ''}
                             onChange={(e) => setLoginPassword(e.target.value)}
-                            error={error}
+                            error={Boolean(errorMessage)}
                         />
                         <Button
                             type="submit"
@@ -84,7 +98,6 @@ const Login = () => {
                             {Strings.login.signIn}
                         </Button>
                         <Grid container justifyContent={"center"}>
-
                             <Grid item>
                                 <NavLink to="/register" variant="body2">
                                     {Strings.login.dontHaveAccount}
