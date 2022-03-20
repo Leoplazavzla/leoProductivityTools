@@ -4,6 +4,8 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {bucket} from "../firebase/firebaseConfig";
 import db from "../firebase/firebaseConfig";
+import * as NotificationToast from "../components/notifications/NotificationToast"
+import Strings from "../resources/Strings";
 
 const PicturesContext = React.createContext(1)
 
@@ -31,6 +33,7 @@ export function PicturesProvider({children}) {
         );
         const docRef = doc(db, "users", userEmail);
         await updateDoc(docRef, {picture: [...newPictureArray]});
+        NotificationToast.errorToast(Strings.pictures.deleted)
         setPictureArray(newPictureArray)
 
     }
@@ -40,6 +43,7 @@ export function PicturesProvider({children}) {
 
         const docRef = doc(db, "users", userEmail);
         await updateDoc(docRef, {picture: [...newPictureArray]})
+        NotificationToast.successToast(Strings.pictures.success)
         setPictureArray(newPictureArray)
 
     }

@@ -2,6 +2,8 @@ import React, {useContext, useState, useEffect} from "react";
 import {useAuth} from "./AuthContext"
 import { doc, addDoc, updateDoc, collection, getDocs, deleteDoc} from "firebase/firestore";
 import db from "../firebase/firebaseConfig";
+import * as NotificationToast from "../components/notifications/NotificationToast"
+import Strings from "../resources/Strings";
 
 const NotesContext = React.createContext(1)
 
@@ -23,6 +25,7 @@ export function NotesProvider({children}) {
     const deleteNotes = async (noteId, userEmail) => {
         const noteToDelete = doc(db, userEmail, noteId)
         await deleteDoc(noteToDelete);
+        NotificationToast.errorToast(Strings.notes.deleted)
 
         const filteredNoteArray = noteArray.filter((note)=>
             note.id !== noteId)
@@ -40,6 +43,7 @@ export function NotesProvider({children}) {
         const docToEdit = doc(db, userEmail, noteId)
         const newData = {name: editNoteName, description: editNoteDescription, id: noteId}
         await updateDoc(docToEdit, newData )
+        NotificationToast.infoToast(Strings.notes.edited)
         setIsEditing(false)
         setNoteArray([newData])
     }
@@ -48,6 +52,7 @@ export function NotesProvider({children}) {
         const newNote = {name: name, description: description}
         const colRef = await collection(db, userEmail)
         const note = await addDoc(colRef, newNote);
+        NotificationToast.successToast(Strings.notes.success)
         setNoteArray([
             ...noteArray,
             {...newNote, id: note.id}

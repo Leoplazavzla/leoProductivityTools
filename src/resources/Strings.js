@@ -41,7 +41,10 @@ const Strings = () => {
                 addAlarm: "Add Alarm",
                 alarmName: "Alarm Name",
                 update: "Update alarm",
-                description: "Create as many alarms as you need"
+                description: "Create as many alarms as you need",
+                success: "The alarm was added successfully",
+                deleted: "The alarm was deleted",
+                stop: "The alarm hast stopped"
             },
             notes: {
                 name: "Notes",
@@ -50,7 +53,10 @@ const Strings = () => {
                 delete: "Delete Note",
                 edit: "Edit Note",
                 update: "Update Note",
-                description: "Save your thoughts"
+                description: "Save your thoughts",
+                success: "The note was added successfully",
+                deleted: "The note was deleted",
+                edited: "The note was edited"
             },
             pictures: {
                 name: "Pictures",
@@ -64,7 +70,10 @@ const Strings = () => {
                 download: "Download File",
                 copy: "Copy URL",
                 delete: "Delete Picture",
-                see: "See File"
+                see: "See File",
+                success: "File uploaded successfully",
+                edited: "File has been updated",
+                deleted: "File has been deleted"
             },
             pomodoro: {
                 name: "Pomodoro Clock",
