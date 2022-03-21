@@ -68,7 +68,7 @@ const Dashboard = () => {
                     pb: 6,
                 }}
             >
-                <Container maxWidth="sm">
+                <Container maxWidth="md">
                     <Typography
                         component="h1"
                         variant="h2"
@@ -106,7 +106,7 @@ const Dashboard = () => {
                             href={paths.personalDetails.linkedin}
                         >
                             <LinkedIn />
-                            <Typography ml={"1"}>
+                            <Typography sx={{marginLeft: 1}}>
                                 { Strings.personalDetails.linkedin}
                             </Typography>
 

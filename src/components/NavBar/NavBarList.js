@@ -56,13 +56,13 @@ export default function NavBarList() {
                             <ListItemText primary={Strings.pictures.name}/>
                         </ListItem>
 
-                        <ListItem disablepadding={"false"} color={"primary"} button component={Link}
+                        {/*<ListItem disablepadding={"false"} color={"primary"} button component={Link}
                                   to={paths.pomodoro.basePath}>
                             <ListItemIcon>
                                 <Timer/>
                             </ListItemIcon>
                             <ListItemText primary={Strings.pomodoro.name}/>
-                        </ListItem>
+                        </ListItem>*/}
                     </List>
                 </nav> : <div></div>}
 

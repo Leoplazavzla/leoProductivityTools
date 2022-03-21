@@ -21,6 +21,7 @@ const Login = () => {
 
     const singIn = async (e) => {
         e.preventDefault()
+
         const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
 
         if(regEx.test(loginEmail) || loginEmail === ""){
@@ -33,13 +34,15 @@ const Login = () => {
             setErrorMessage(null)
             setLoading(true)
             await logIn(auth, loginEmail, loginPassword)
+            setLoading(false)
             navigate("/")
+
 
         }catch (error){
             console.log(error)
             setErrorMessage(Strings.register.accountInvalid)
         }
-        setLoading(false)
+
     }
 
     return(

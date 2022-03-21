@@ -1,7 +1,7 @@
 const Strings = () => {
     return ({
             app: {
-                name: "Leo's PM Tools"
+                name: "Leo's Productivity Tools"
             },
             navBar: {
                 dashboard: "Dashboard",
@@ -25,6 +25,7 @@ const Strings = () => {
                 passLowerThanSix: "The password should have at least 6 characters",
                 invalidEmail: "Email is invalid",
                 accountInvalid: "The account is invalid",
+                addPassword: "Please add a password",
                 haveAnAccount: "Already have an account? Login",
             },
             login: {
@@ -91,7 +92,7 @@ const Strings = () => {
                 description: "Increase your productivity"
             },
             dashboard: {
-                title: "Leo's PM Tools",
+                title: "Leo's Productivity Tools",
                 paragraph1: "This is my ReactJS webApp created to hold all the tools I use in my day-to-day work. I'll be adding new features in the future :-)"
             },
             about: {

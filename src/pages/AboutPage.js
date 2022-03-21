@@ -4,18 +4,10 @@ import Strings from "../resources/Strings";
 import {Link} from "react-router-dom";
 import {paths} from "../resources/paths";
 import LinkedIn from "@material-ui/icons/LinkedIn";
+import GitHubIcon from '@mui/icons-material/GitHub';
+import Copyright from "../components/Copyright";
 
 const About = () => {
-
-    function Copyright(props) {
-        return (
-            <Typography variant="body2" color="text.secondary" align="center" {...props} mt={8}>
-                {'Copyright © leospmtools '}
-                {new Date().getFullYear()}
-                {'.'}
-            </Typography>
-        );
-    }
 
     return(
         <>
@@ -48,12 +40,16 @@ const About = () => {
                     >
                         <Button
                             rel="noreferrer"
-                            component={Link}
+                            component={"a"}
+                            target={"_blank"}
                             variant={"contained"}
                             color={"primary"}
-                            to={paths.about}
+                            href={paths.personalDetails.github}
                         >
-                            {Strings.about.about}
+                            <GitHubIcon/>
+                            <Typography sx={{marginLeft: 1}}>
+                            {Strings.personalDetails.github}
+                            </Typography>
                         </Button>
                         <Button
                             rel="noreferrer"
@@ -64,7 +60,7 @@ const About = () => {
                             href={paths.personalDetails.linkedin}
                         >
                             <LinkedIn />
-                            <Typography ml={"1"}>
+                            <Typography sx={{marginLeft: 1}}>
                                 { Strings.personalDetails.linkedin}
                             </Typography>
 
