@@ -16,46 +16,48 @@ const NoteList = () => {
             {noteArray ?
                 <Grid container spacing={1}>
                     {noteArray.map((note) => {
-                        console.log(note.id)
+                        const title = <Typography color={"secondary"} variant={"h5"}>{note.name}</Typography>
                         return (
                         <Grid item key={note.id} xs={12} sm={6} md={4}>
                             <Card >
                                 <CardHeader
-                                title={note.name}
-                                action={<>
-                                    <IconButton
-                                        color={"primary"}
-                                        size="small"
-                                        onClick={() => {
-                                            editNote(note.id, note.name, note.description)
-                                            setNoteId(note.id)
-                                        }}
-                                    >
-                                        <EditIcon/>
-                                    </IconButton>
+                                    color={"primary"}
+                                    title={title}
+                                    action={
+                                    <>
+                                        <IconButton
+                                            color={"primary"}
+                                            size="small"
+                                            onClick={() => {
+                                                editNote(note.id, note.name, note.description)
+                                                setNoteId(note.id)
+                                            }}
+                                        >
+                                            <EditIcon/>
+                                        </IconButton>
 
-                                    <CopyToClipboard text= {note.description}>
-                                    <IconButton
-                                        color={"secondary"}
-                                        size="small"
-                                        onClick={() => {
-                                            copyNoteContent(true)
-                                        }}
-                                    >
-                                        <ContentCopyIcon/>
-                                    </IconButton>
-                                    </CopyToClipboard>
+                                        <CopyToClipboard text= {note.description}>
+                                        <IconButton
+                                            color={"secondary"}
+                                            size="small"
+                                            onClick={() => {
+                                                copyNoteContent(true)
+                                            }}
+                                        >
+                                            <ContentCopyIcon/>
+                                        </IconButton>
+                                        </CopyToClipboard>
 
-                                    <IconButton
-                                    color={"error"}
-                                    size="small"
-                                    onClick={() => deleteNotes(note.id, currentUser.email)}
+                                        <IconButton
+                                        color={"error"}
+                                        size="small"
+                                        onClick={() => deleteNotes(note.id, currentUser.email)}
+                                        >
+                                        <DeleteIcon/>
+                                        </IconButton>
+                                    </>
+                                    }
                                     >
-                                    <DeleteIcon/>
-                                    </IconButton>
-                                </>
-                                }
-                                >
 
                                 </CardHeader>
                                 <CardContent>

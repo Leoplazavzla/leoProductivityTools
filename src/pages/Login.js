@@ -9,6 +9,7 @@ import {useAuth} from "../contexts/AuthContext"
 import LoginIcon from '@mui/icons-material/Login';
 import {NavLink} from "react-router-dom";
 import Alert from "@mui/material/Alert";
+import Copyright from "../components/Copyright";
 
 const Login = () => {
     let navigate = useNavigate();
@@ -109,6 +110,7 @@ const Login = () => {
                         </Grid>
                     </Box>
                 </Box>
+                <Copyright/>
             </Container>
         </BaseLayout>
     )

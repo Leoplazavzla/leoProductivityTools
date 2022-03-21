@@ -9,6 +9,7 @@ import Alert from '@mui/material/Alert';
 import {useAuth} from "../contexts/AuthContext";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {NavLink} from "react-router-dom";
+import Copyright from "../components/Copyright";
 
 const Register = () => {
     const {register, currentUser} = useAuth();
@@ -175,6 +176,7 @@ const Register = () => {
                     </Grid>
                 </Box>
                 </Box>
+                <Copyright/>
         </Container>
 </BaseLayout>
 )
