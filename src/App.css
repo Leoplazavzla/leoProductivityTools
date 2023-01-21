@@ -41,12 +41,12 @@
   margin-bottom: 30px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .my-masonry-grid {
     margin-left: -15px; /* gutter size offset */
   }
   .my-masonry-grid_column {
-    padding-left: 15px; /* gutter size offset */
+    padding-left: 10px; /* gutter size offset */
   }
   .my-masonry-grid_column > div {
     margin-bottom: 15px; /* space between items */
