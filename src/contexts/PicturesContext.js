@@ -76,13 +76,15 @@ export function PicturesProvider({children}) {
 
 
     useEffect(() => {
-        const fetchPictures = async() => {
-            const fetchedPictures = await searchOrCreateDoc(currentUser.email)
-            await setPictureArray(fetchedPictures)
-            setLoading(false)
-            return fetchedPictures
+        if(currentUser){
+            const fetchPictures = async() => {
+                const fetchedPictures = await searchOrCreateDoc(currentUser.email)
+                await setPictureArray(fetchedPictures)
+                setLoading(false)
+                return fetchedPictures
+            }
+            fetchPictures();
         }
-        fetchPictures();
 
     }, [])
 

@@ -22,7 +22,7 @@ import NotesPage from "./pages/NotesPage";
 const NavigationRoutes = () => {
     return (
         <Routes>
-            <Route exact path={paths.home} element={<PrivateRoute> <Dashboard/> </PrivateRoute>}/>
+            <Route exact path={paths.home} element={ <PrivateRoute> <Dashboard/> </PrivateRoute> }/>
             {/*<Route path={paths.dashboard} element={<PrivateRoute> <Dashboard/> </PrivateRoute>}/>*/}
             <Route path={paths.alarm.basePath} element={<PrivateRoute> <AlarmPage/></PrivateRoute>}/>
             <Route path={paths.notes.basePath} element={<PrivateRoute> <NotesPage/> </PrivateRoute>}/>
