@@ -12,9 +12,7 @@ function App() {
         <ThemeProvider theme={theme}>
             <DateProvider>
                 <AuthProvider>
-                    <PicturesProvider>
                         <Navigation/>
-                    </PicturesProvider>
                 </AuthProvider>
             </DateProvider>
 

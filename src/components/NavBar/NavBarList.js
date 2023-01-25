@@ -9,7 +9,7 @@ import {paths} from "../../resources/paths"
 import {useAuth} from "../../contexts/AuthContext"
 import {auth} from "../../firebase/firebaseConfig"
 import {Link, useNavigate} from "react-router-dom"
-import {NoteAlt, Timer, NotificationsActive} from "@mui/icons-material";
+import {NoteAlt, NotificationsActive} from "@mui/icons-material";
 
 export default function NavBarList() {
 

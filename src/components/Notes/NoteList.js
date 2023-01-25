@@ -1,12 +1,11 @@
 import React from "react"
-import {Card, CardContent, Grid, Typography, IconButton, CardHeader} from "@mui/material";
+import {Card, CardContent, Typography, IconButton, CardHeader} from "@mui/material";
 import {useNote} from "../../contexts/NotesContext";
 import {useAuth} from "../../contexts/AuthContext"
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import {CopyToClipboard} from "react-copy-to-clipboard";
-//import {Masonry} from "@mui/lab";
 import Masonry from 'react-masonry-css'
 
 

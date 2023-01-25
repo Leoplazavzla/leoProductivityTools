@@ -11,7 +11,6 @@ import NewPost from "./pages/NewPost"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Logout from "./pages/Logout"
-import Motorcycles from "./pages/motorcycles"
 import ErrorPage from "./pages/ErrorPage";
 import AlarmPage from "./pages/AlarmPage"
 import Pictures from "./pages/PicturesPage";
@@ -34,7 +33,6 @@ const NavigationRoutes = () => {
             <Route path={paths.login} element={<Login/>}/>
             <Route path={paths.register} element={<Register/>}/>
             <Route path={paths.logout} element={<Logout/>}/>
-            <Route path={paths.motorcycles} element={<PrivateRoute> <Motorcycles/> </PrivateRoute>}/>
             <Route path={"*"} element={<ErrorPage/>}/>
 
         </Routes>

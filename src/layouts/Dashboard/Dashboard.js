@@ -79,9 +79,6 @@ const Dashboard = () => {
                         {Strings.dashboard.title}
                     </Typography>
 
-                    {/*<Typography variant="h5" align="center" color="text.secondary" paragraph>
-                        {Strings.dashboard.paragraph1}
-                    </Typography>*/}
                     <Stack
                         sx={{ pt: 4 }}
                         direction="row"
