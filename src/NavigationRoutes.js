@@ -17,6 +17,7 @@ import Pictures from "./pages/PicturesPage";
 import Pomodoro from "./pages/PomodoroPage"
 import AboutPage from "./pages/AboutPage";
 import NotesPage from "./pages/NotesPage";
+import CompaniesPage from "./pages/CompaniesPage";
 
 const NavigationRoutes = () => {
     return (
@@ -28,6 +29,7 @@ const NavigationRoutes = () => {
             <Route path={paths.pictures.basePath} element={<PrivateRoute> <Pictures/> </PrivateRoute>}/>
             <Route path={paths.pomodoro.basePath} element={<PrivateRoute> <Pomodoro/> </PrivateRoute>}/>
             <Route path={paths.messages.basePath} element={<PrivateRoute> <Messages/> </PrivateRoute>}/>
+            <Route path={paths.companies.basePath} element={<PrivateRoute> <CompaniesPage/> </PrivateRoute>}/>
             <Route path={paths.about} element={<PrivateRoute> <AboutPage/> </PrivateRoute>}/>
             <Route path={paths.posts.new} element={<PrivateRoute> <NewPost/> </PrivateRoute>}/>
             <Route path={paths.login} element={<Login/>}/>

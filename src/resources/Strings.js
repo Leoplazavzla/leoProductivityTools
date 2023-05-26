@@ -37,6 +37,9 @@ const Strings = () => {
                 signIn: "Sign In",
                 dontHaveAccount: "Don't have an account? Sign Up",
             },
+            companies: {
+                name: "Companies",
+            },
             alarm: {
                 name: "Alarms",
                 new: "New Alarm",

@@ -6,6 +6,9 @@ export const paths = {
     register: "/register",
     dashboard: "/dashboard",
     about: "/about",
+    companies: {
+        basePath: "/companies"
+    },
     messages: {
         basePath: "/messages"
     },

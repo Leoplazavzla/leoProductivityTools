@@ -33,11 +33,11 @@ export default function NavBarList() {
                         </ListItem>
 
                         <ListItem disablepadding={"false"} color={"primary"} button component={Link}
-                                  to={paths.alarm.basePath}>
+                                  to={paths.companies.basePath}>
                             <ListItemIcon>
                                 <NotificationsActive/>
                             </ListItemIcon>
-                            <ListItemText primary={Strings.alarm.name}/>
+                            <ListItemText primary={Strings.companies.name}/>
                         </ListItem>
 
                         <ListItem disablepadding={"false"} color={"primary"} button component={Link}
